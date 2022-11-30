@@ -1,14 +1,14 @@
-import React, { /* useState */} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
-  // const [email, setEmail] = useState('');
+  const [email] = useState('');
   // const [password, setPassword] = useState('');
   // const [name, setName] = useState('');
 
   return (
-    <AppContext.Provider value={ values }>
+    <AppContext.Provider value={ email }>
       {children}
     </AppContext.Provider>
   );
