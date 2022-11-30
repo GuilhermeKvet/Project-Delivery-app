@@ -9,19 +9,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      user_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      seller_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      total_price: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      delivery_address: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      email: {
+      delivery_number: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      password: {
+      sale_date: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
-      role: {
+      status: {
         allowNull: false,
         type: Sequelize.STRING,
       }
