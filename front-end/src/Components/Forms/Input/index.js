@@ -1,4 +1,3 @@
-import './style.css';
 import PropTypes from 'prop-types';
 
 function Input(props) {
