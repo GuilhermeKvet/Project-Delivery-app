@@ -1,5 +1,6 @@
 // import bodyParser from 'body-parser';
 const express = require('express');
+require('express-async-errors');
 const { loginRouter } = require('./Routes');
 const errorMiddleware = require('./Middlewares/errorMiddleware');
 
