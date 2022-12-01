@@ -9,7 +9,7 @@ const validatePassword = (password) => {
 };
 
 const validateLogin = (email, password) => 
-  (this.validateEmail(email) && this.validatePassword(password));
+  (validateEmail(email) && validatePassword(password));
 
 module.exports = {
   validateEmail,

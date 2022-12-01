@@ -1,7 +1,6 @@
 // import bodyParser from 'body-parser';
 const express = require('express');
-
-const loginRouter = require('./Routes/loginRouter');
+const { loginRouter } = require('./Routes');
 const errorMiddleware = require('./Middlewares/errorMiddleware');
 
 const app = express();
@@ -10,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-app.post('/login', loginRouter);
+app.use('/login', loginRouter);
 
 app.use(errorMiddleware);
 
