@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
 import Button from '../../Components/Forms/Button';
 import ItemCard from '../../Components/Card/Item';
@@ -6,6 +7,8 @@ import ItemCard from '../../Components/Card/Item';
 
 function Products() {
   const { name } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const [bebidas, setBebidas] = useState([]);
 
   useEffect(() => {
@@ -16,6 +19,11 @@ function Products() {
     };
     requestBebidas();
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
   return (
     <header id="RegisterComponent">
@@ -32,12 +40,13 @@ function Products() {
 
       <Button
         testId="customer_products__element-navbar-user-full-name"
-        text={ name }
+        text={ `${name}` }
       />
 
       <Button
         testId="customer_products__element-navbar-link-logout"
         text="SAIR"
+        exec={ logout }
       />
       { bebidas.map((bebida, index) => (
         <ItemCard

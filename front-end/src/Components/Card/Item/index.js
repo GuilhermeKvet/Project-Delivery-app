@@ -7,7 +7,7 @@ function ItemCard(props) {
     <div>
       <div>
         <p data-testid={ `customer_products__element-card-price-${index}` }>
-          {price}
+          {`R$ ${price.replace('.', ',')}`}
         </p>
       </div>
       <div>

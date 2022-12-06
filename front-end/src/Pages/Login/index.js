@@ -5,7 +5,13 @@ import Button from '../../Components/Forms/Button';
 import Input from '../../Components/Forms/Input';
 
 function Login() {
-  const { email, password, disableLoginButton, setError } = useContext(AppContext);
+  const {
+    email,
+    password,
+    disableLoginButton,
+    setError,
+    setName,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -20,9 +26,13 @@ function Login() {
       headers: { 'Content-type': 'application/json' },
     });
 
+    const user = await response.json();
+
     if (response.ok === false) {
       setError({ message: response.statusText, status: response.status });
     } else {
+      setName(user.name);
+      localStorage.setItem('user', JSON.stringify(user));
       navigate('/customer/products');
     }
   };

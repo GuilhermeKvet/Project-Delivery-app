@@ -23,13 +23,10 @@ function Amount(props) {
       >
         -
       </button>
-      <div>
-        <p
-          data-testid={ `customer_products__input-card-quantity-${index}` }
-        >
-          {quantity}
-        </p>
-      </div>
+      <input
+        data-testid={ `customer_products__input-card-quantity-${index}` }
+        value={ quantity }
+      />
       <button
         data-testid={ `customer_products__button-card-add-item-${index}` }
         type="button"
