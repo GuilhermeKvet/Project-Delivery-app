@@ -61,7 +61,7 @@ function Register() {
         <Button
           testId="common_register__button-register"
           text="CADASTRAR"
-          disable={ disableRegisterButton }
+          disable={ Boolean(disableRegisterButton) }
           exec={ request }
         />
         <span

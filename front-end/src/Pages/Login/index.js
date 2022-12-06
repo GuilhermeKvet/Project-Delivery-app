@@ -46,7 +46,7 @@ function Login() {
       <Button
         testId="common_login__button-login"
         text="LOGIN"
-        disable={ disableLoginButton }
+        disable={ Boolean(disableLoginButton) }
         exec={ request }
       />
       <Button
