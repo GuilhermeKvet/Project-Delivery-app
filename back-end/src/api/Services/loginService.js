@@ -1,7 +1,10 @@
+const md5 = require('md5');
 const HttpException = require('../Helpers/httpError');
 const { User } = require('../../database/models');
-const { validateLogin } = require('../Validations/login.validation');
-const md5 = require('md5');
+const { validateLogin } = require('../Validations/loginValidation');
+
+const TRUE = true;
+const FALSE = false;
 
 const login = async (email, password) => {
   if (!validateLogin(email, password)) throw new HttpException(401, 'All fields must be filled');
@@ -10,7 +13,7 @@ const login = async (email, password) => {
 
   if (!user) throw new HttpException(404, 'Not found');
 
-  const isValidPassword = md5(password) === user.password ? true : false;
+  const isValidPassword = md5(password) === user.password ? TRUE : FALSE;
 
   if (!isValidPassword) throw new HttpException(404, 'Not found');
 

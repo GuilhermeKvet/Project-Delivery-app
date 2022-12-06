@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../../Context/AppContext';
+import AppContext from '../../../Context/AppContext';
 
 function Input(props) {
-  const { setEmail, setPassword } = useContext(AppContext);
+  const { setEmail, setPassword, setName } = useContext(AppContext);
   const { lable, testId, placeholder, type, state } = props;
   const id = `${lable}${testId}`;
 
@@ -13,6 +13,8 @@ function Input(props) {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
+    } else if (name === 'name') {
+      setName(value);
     }
   };
 

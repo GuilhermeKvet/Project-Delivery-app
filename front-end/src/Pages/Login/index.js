@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppContext from '../Context/AppContext';
-import Button from '../Forms/Button';
-import Input from '../Forms/Input';
+import AppContext from '../../Context/AppContext';
+import Button from '../../Components/Forms/Button';
+import Input from '../../Components/Forms/Input';
 
 function Login() {
-  const { email, password, disableLoginButton } = useContext(AppContext);
+  const { email, password, disableLoginButton, setError } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -16,11 +16,15 @@ function Login() {
 
     const response = await fetch(url, {
       body,
-      method: 'POST',
+      method: 'post',
       headers: { 'Content-type': 'application/json' },
     });
 
-    console.log('RESPONSE', response);
+    if (response.ok === false) {
+      setError({ message: response.statusText, status: response.status });
+    } else {
+      navigate('/customer/products');
+    }
   };
 
   return (
@@ -42,13 +46,12 @@ function Login() {
       <Button
         testId="common_login__button-login"
         text="LOGIN"
-        type="login"
         disable={ disableLoginButton }
         exec={ request }
       />
       <Button
         testId="common_login__button-register"
-        type="register"
+        disable={ false }
         text="Ainda não tenho conta"
         exec={ () => navigate('/register') }
       />
