@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import Provider from './Components/Context/Provider';
+import Provider from './Context/Provider';
 
 ReactDOM.render(
   <Provider>

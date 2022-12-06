@@ -1,5 +1,7 @@
-require('express-async-errors');
-
-module.exports = (err, _req, res, _next) => {
+const errorMiddleware = (err, _req, res, next) => {
+  console.log(err);
   res.status(err.statusCode).json({ message: err.message });
+  next();
 };
+
+module.exports = errorMiddleware;
