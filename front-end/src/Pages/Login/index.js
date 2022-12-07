@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
-import Button from '../../Components/Forms/Button';
-import Input from '../../Components/Forms/Input';
+import Button from '../../Components/Button';
+import Input from '../../Components/Input';
 
 function Login() {
   const {
@@ -33,6 +33,7 @@ function Login() {
     } else {
       setName(user.name);
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('carrinho', JSON.stringify([]));
       navigate('/customer/products');
     }
   };

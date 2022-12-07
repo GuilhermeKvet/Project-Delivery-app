@@ -14,6 +14,7 @@ function Provider({ children }) {
   const [error, setError] = useState({});
   const [disableLoginButton, setdisableLoginButton] = useState(true);
   const [disableRegisterButton, setdisableRegisterButton] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const validateLogin = (emailRecive, passwordRecive) => {
     const regexEmail = /\S+@\S+\.\S+/;
@@ -52,7 +53,17 @@ function Provider({ children }) {
     disableRegisterButton,
     error,
     setError,
-  }), [name, email, password, disableLoginButton, disableRegisterButton, error]);
+    totalPrice,
+    setTotalPrice,
+  }), [
+    name,
+    email,
+    password,
+    disableLoginButton,
+    disableRegisterButton,
+    error,
+    totalPrice,
+  ]);
 
   return (
     <AppContext.Provider

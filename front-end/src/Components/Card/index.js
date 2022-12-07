@@ -23,7 +23,7 @@ function ItemCard(props) {
       >
         {description}
       </h3>
-      <Amount index={ index } />
+      <Amount index={ index } price={ price } name={ description } />
     </div>
   );
 }

@@ -6,11 +6,13 @@ import Register from './Pages/Register';
 import Home from './Pages/Home';
 import Products from './Pages/Products';
 import Pedidos from './Pages/Pedidos';
+import Checkout from './Pages/Checkout';
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route exact path="/customer/checkout" element={ <Checkout /> } />
         <Route exact path="/customer/orders" element={ <Pedidos /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
         <Route exact path="/register" element={ <Register /> } />

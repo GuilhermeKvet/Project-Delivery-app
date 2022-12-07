@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
-import Input from '../../Components/Forms/Input';
-import Button from '../../Components/Forms/Button';
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
 
 function Register() {
   const {
@@ -29,6 +29,7 @@ function Register() {
     if (response.ok === false) {
       setError({ message: response.statusText, status: response.status });
     } else {
+      localStorage.setItem('carrinho', JSON.stringify([]));
       navigate('/customer/products');
     }
   };

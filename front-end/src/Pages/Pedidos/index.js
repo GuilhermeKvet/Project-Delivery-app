@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../../Context/AppContext';
-import Button from '../../Components/Forms/Button';
+import Button from '../../Components/Button';
 
 function Pedidos() {
   const { name } = useContext(AppContext);
