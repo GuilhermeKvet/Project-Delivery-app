@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
-import Button from '../../Components/Forms/Button';
-import Input from '../../Components/Forms/Input';
+import Button from '../../Components/Button';
+import Input from '../../Components/Input';
 
 function Login() {
-  const { email, password, disableLoginButton, setError } = useContext(AppContext);
+  const {
+    email,
+    password,
+    disableLoginButton,
+    setError,
+    setName,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -20,9 +26,14 @@ function Login() {
       headers: { 'Content-type': 'application/json' },
     });
 
+    const user = await response.json();
+
     if (response.ok === false) {
       setError({ message: response.statusText, status: response.status });
     } else {
+      setName(user.name);
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('carrinho', JSON.stringify([]));
       navigate('/customer/products');
     }
   };
@@ -46,7 +57,7 @@ function Login() {
       <Button
         testId="common_login__button-login"
         text="LOGIN"
-        disable={ disableLoginButton }
+        disable={ Boolean(disableLoginButton) }
         exec={ request }
       />
       <Button

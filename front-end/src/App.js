@@ -4,12 +4,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Home from './Pages/Home';
+import Products from './Pages/Products';
+import Pedidos from './Pages/Pedidos';
+import Checkout from './Pages/Checkout';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/customer/products" element={ <Register /> } />
+        <Route exact path="/customer/checkout" element={ <Checkout /> } />
+        <Route exact path="/customer/orders" element={ <Pedidos /> } />
+        <Route exact path="/customer/products" element={ <Products /> } />
         <Route exact path="/register" element={ <Register /> } />
         <Route exact path="/login" element={ <Login /> } />
         <Route exact path="/" element={ <Home /> } />

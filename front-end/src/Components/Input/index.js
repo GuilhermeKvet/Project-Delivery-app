@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../../../Context/AppContext';
+import AppContext from '../../Context/AppContext';
 
 function Input(props) {
   const { setEmail, setPassword, setName } = useContext(AppContext);

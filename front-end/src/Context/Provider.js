@@ -4,6 +4,8 @@ import AppContext from './AppContext';
 
 const SIX = 6;
 const TWELVE = 12;
+const TRUE = true;
+const FALSE = false;
 
 function Provider({ children }) {
   const [name, setName] = useState('');
@@ -12,31 +14,33 @@ function Provider({ children }) {
   const [error, setError] = useState({});
   const [disableLoginButton, setdisableLoginButton] = useState(true);
   const [disableRegisterButton, setdisableRegisterButton] = useState(true);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const validateLogin = (emailRecive, passwordRecive) => {
+    const regexEmail = /\S+@\S+\.\S+/;
+    if (regexEmail.test(emailRecive) && passwordRecive.length >= SIX) {
+      return TRUE;
+    }
+    return FALSE;
+  };
 
   useEffect(() => {
-    const validateLogin = () => {
-      const regexEmail = /\S+@\S+\.\S+/;
-      if (regexEmail.test(email) && password.length >= SIX) {
-        setdisableLoginButton(false);
-      } else {
-        setdisableLoginButton(true);
-      }
-    };
+    if (validateLogin(email, password)) {
+      setdisableLoginButton(false);
+    } else {
+      setdisableLoginButton(true);
+    }
     setError({});
-    validateLogin();
-  }, [name, password, email]);
+  }, [password, email]);
 
   useEffect(() => {
-    const validateRegister = () => {
-      if (name.length >= TWELVE) {
-        setdisableRegisterButton(false);
-      } else {
-        setdisableRegisterButton(true);
-      }
-    };
+    if (validateLogin(email, password) && name.length >= TWELVE) {
+      setdisableRegisterButton(false);
+    } else {
+      setdisableRegisterButton(true);
+    }
     setError({});
-    validateRegister();
-  }, [name]);
+  }, [name, email, password]);
 
   const obj = useMemo(() => ({
     name,
@@ -49,7 +53,17 @@ function Provider({ children }) {
     disableRegisterButton,
     error,
     setError,
-  }), [name, email, password, disableLoginButton, disableRegisterButton, error]);
+    totalPrice,
+    setTotalPrice,
+  }), [
+    name,
+    email,
+    password,
+    disableLoginButton,
+    disableRegisterButton,
+    error,
+    totalPrice,
+  ]);
 
   return (
     <AppContext.Provider

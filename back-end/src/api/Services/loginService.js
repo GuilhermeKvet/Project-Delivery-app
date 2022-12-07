@@ -1,23 +1,22 @@
-const md5 = require('md5');
 const HttpException = require('../Helpers/httpError');
 const { User } = require('../../database/models');
 const { validateLogin } = require('../Validations/loginValidation');
-
-const TRUE = true;
-const FALSE = false;
+const { generateToken } = require('../Utils/generateToken');
 
 const login = async (email, password) => {
-  if (!validateLogin(email, password)) throw new HttpException(401, 'All fields must be filled');
-  
   const user = await User.findOne({ where: { email } });
-
+  
   if (!user) throw new HttpException(404, 'Not found');
+  
+  if (!validateLogin(email, password, user)) {
+    throw new HttpException(401, 'All fields must be filled');
+  }
 
-  const isValidPassword = md5(password) === user.password ? TRUE : FALSE;
+  delete user.dataValues.password;
 
-  if (!isValidPassword) throw new HttpException(404, 'Not found');
+  const token = generateToken({});
 
-  return user;
+  return { token, ...user.dataValues };
 };
 
 module.exports = {
