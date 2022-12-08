@@ -11,7 +11,7 @@ function Address() {
       endereco,
       numero,
     };
-    localStorage.setItem('adress', JSON.stringify(address));
+    localStorage.setItem('address', JSON.stringify(address));
   }, [vendedora, endereco, numero]);
 
   return (

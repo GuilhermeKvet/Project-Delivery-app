@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ItemCard from '../../Components/Card';
 import Header from '../../Components/Header';
-import ShoppingCart from '../../Components/ShoppingCart';
+import TotalPriceButton from '../../Components/TotalPriceButton';
+import AppContext from '../../Context/AppContext';
 
 function Products() {
   const [bebidas, setBebidas] = useState([]);
+  const { totalPrice, setTotalPrice, setProducts } = useContext(AppContext);
 
   useEffect(() => {
     const requestBebidas = async () => {
@@ -12,8 +14,15 @@ function Products() {
       const data = await response.json();
       setBebidas(data);
     };
+
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    setProducts(cart);
+
+    setTotalPrice(
+      cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
+    );
     requestBebidas();
-  }, []);
+  }, [setProducts, setTotalPrice]);
 
   return (
     <div>
@@ -29,7 +38,10 @@ function Products() {
           />
         ))}
       </div>
-      <ShoppingCart />
+      <TotalPriceButton
+        totalPrice={ totalPrice }
+        testId="customer_products__button-cart"
+      />
     </div>
   );
 }
