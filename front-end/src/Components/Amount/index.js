@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import AppContext from '../../Context/AppContext';
 
 function Amount(props) {
-  const { totalPrice, setTotalPrice } = useContext(AppContext);
+  const { totalPrice, setTotalPrice, setProducts, products } = useContext(AppContext);
 
   const { index, price, name } = props;
 
@@ -11,6 +11,7 @@ function Amount(props) {
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
+    setProducts(cart);
     const currentSale = cart.find((sale) => sale.name === name);
     if (currentSale) {
       setQuantity(currentSale.quantity);
@@ -20,18 +21,17 @@ function Amount(props) {
     setTotalPrice(
       cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
     );
-  }, [name, quantity, setTotalPrice]);
+  }, [name, quantity, setTotalPrice, setProducts]);
 
   const addSaleLocalStorage = (currentQuantity) => {
     setQuantity(currentQuantity);
-    const cart = JSON.parse(localStorage.getItem('carrinho'));
     const newSale = { name, price, quantity: currentQuantity };
 
-    if (cart.length === 0) {
+    if (products.length === 0) {
       localStorage.setItem('carrinho', JSON.stringify([newSale]));
     }
-    if (cart.some((sale) => sale.name === name)) {
-      const newCart = cart.map((sale) => {
+    if (products.some((sale) => sale.name === name)) {
+      const newCart = products.map((sale) => {
         if (sale.name === name) {
           sale.quantity = currentQuantity;
         }
@@ -39,7 +39,7 @@ function Amount(props) {
       });
       localStorage.setItem('carrinho', JSON.stringify(newCart));
     } else {
-      localStorage.setItem('carrinho', JSON.stringify([...cart, newSale]));
+      localStorage.setItem('carrinho', JSON.stringify([...products, newSale]));
     }
   };
 
@@ -50,11 +50,10 @@ function Amount(props) {
   };
 
   const rmItem = () => {
-    const cart = JSON.parse(localStorage.getItem('carrinho'));
     setQuantity(quantity - 1);
     setTotalPrice(totalPrice - Number(price));
 
-    const newCart = cart.map((sale) => {
+    const newCart = products.map((sale) => {
       if (sale.name === name) {
         sale.quantity -= 1;
       }
@@ -78,6 +77,7 @@ function Amount(props) {
       </button>
       <input
         data-testid={ `customer_products__input-card-quantity-${index}` }
+        type="number"
         value={ quantity }
         onChange={ (e) => addSaleLocalStorage(Number(e.target.value)) }
       />

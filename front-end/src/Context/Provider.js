@@ -15,6 +15,7 @@ function Provider({ children }) {
   const [disableLoginButton, setdisableLoginButton] = useState(true);
   const [disableRegisterButton, setdisableRegisterButton] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [products, setProducts] = useState([]);
 
   const validateLogin = (emailRecive, passwordRecive) => {
     const regexEmail = /\S+@\S+\.\S+/;
@@ -55,6 +56,8 @@ function Provider({ children }) {
     setError,
     totalPrice,
     setTotalPrice,
+    products,
+    setProducts,
   }), [
     name,
     email,
@@ -63,6 +66,7 @@ function Provider({ children }) {
     disableRegisterButton,
     error,
     totalPrice,
+    products,
   ]);
 
   return (
