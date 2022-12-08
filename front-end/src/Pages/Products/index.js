@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ItemCard from '../../Components/Card';
 import Header from '../../Components/Header';
-import ShoppingCart from '../../Components/shopping Cart';
+import ShoppingCart from '../../Components/ShoppingCart';
 
 function Products() {
   const [bebidas, setBebidas] = useState([]);

@@ -4,7 +4,9 @@ import AppContext from '../../Context/AppContext';
 
 function ShoppingCart() {
   const { totalPrice } = useContext(AppContext);
+
   const navigate = useNavigate();
+
   return (
     <button
       data-testid="customer_products__button-cart"
