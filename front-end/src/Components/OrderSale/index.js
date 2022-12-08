@@ -1,12 +1,11 @@
 import { useContext } from 'react';
 import AppContext from '../../Context/AppContext';
+import modelValue from '../../Utils/modelValue';
 
 function OrderSale(prop) {
-  const { index, price, name, quantity } = prop;
+  const { index, price, name, quantity, isEditable } = prop;
 
   const { setProducts } = useContext(AppContext);
-
-  const modelValue = (value) => value.toFixed(2).replace('.', ',');
 
   const rmItem = () => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
@@ -42,15 +41,18 @@ function OrderSale(prop) {
       >
         {modelValue(Number(price * quantity))}
       </td>
-      <td>
-        <button
-          type="button"
-          onClick={ rmItem }
-          data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-        >
-          Remover
-        </button>
-      </td>
+      {isEditable
+        && (
+          <td>
+            <button
+              type="button"
+              onClick={ rmItem }
+              data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+            >
+              Remover
+            </button>
+          </td>
+        )}
     </tr>
   );
 }

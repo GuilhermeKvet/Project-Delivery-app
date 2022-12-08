@@ -3,17 +3,21 @@ import React, { useContext, useEffect } from 'react';
 import Header from '../../Components/Header';
 import OrderSale from '../../Components/OrderSale';
 import TableHeader from '../../Components/TableHeader';
+import Button from '../../Components/Button';
 import Address from '../../Components/address details';
 import AppContext from '../../Context/AppContext';
+import TotalPriceButton from '../../Components/TotalPriceButton';
 // const navigate = useNavigate();
 
 function Pedidos() {
-  const { products, setProducts } = useContext(AppContext);
+  const { products, setProducts, totalPrice } = useContext(AppContext);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     setProducts(cart);
   }, [setProducts]);
+
+  const finishOrder = () => {};
 
   return (
     <div>
@@ -30,12 +34,26 @@ function Pedidos() {
                 name={ sale.name }
                 price={ sale.price }
                 quantity={ sale.quantity }
+                isEditable
               />
             ))}
           </tbody>
         </table>
+        <TotalPriceButton
+          totalPrice={ totalPrice }
+          testId="customer_checkout__element-order-total-price"
+        />
       </div>
-      <Address />
+      <div>
+        <h2>Detalhes e Endereço para Entrega</h2>
+        <Address />
+        <Button
+          text="Finalizar pedido"
+          testId="customer_checkout__button-submit-order"
+          exec={ finishOrder }
+          disable={ false }
+        />
+      </div>
     </div>
   );
 }
