@@ -1,40 +1,69 @@
 import PropTypes from 'prop-types';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import AppContext from '../../Context/AppContext';
 
 function Amount(props) {
   const { totalPrice, setTotalPrice } = useContext(AppContext);
-  const [quantity, setQuantity] = useState(0);
 
   const { index, price, name } = props;
 
-  const addItem = () => {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho'));
-    const newSale = { name, price, quantity };
+  const [quantity, setQuantity] = useState(0);
 
-    if (carrinho.length === 0) {
-      localStorage.setItem('carrinho', JSON.stringify([...carrinho, newSale]));
-      console.log('if');
-    } else if (carrinho.some((sale) => sale.name === name)) {
-      // localStorage.setItem('carrinho', JSON.stringify([...carrinho, newSale]));
-      console.log('else if', carrinho);
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    const currentSale = cart.find((sale) => sale.name === name);
+    if (currentSale) {
+      setQuantity(currentSale.quantity);
     } else {
-      localStorage.setItem('carrinho', JSON.stringify([...carrinho, newSale]));
+      setQuantity(quantity);
     }
-    console.log('else');
+    setTotalPrice(
+      cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
+    );
+  }, [name, quantity, setTotalPrice]);
 
+  const addSaleLocalStorage = (currentQuantity) => {
+    setQuantity(currentQuantity);
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    const newSale = { name, price, quantity: currentQuantity };
+
+    if (cart.length === 0) {
+      localStorage.setItem('carrinho', JSON.stringify([newSale]));
+    }
+    if (cart.some((sale) => sale.name === name)) {
+      const newCart = cart.map((sale) => {
+        if (sale.name === name) {
+          sale.quantity = currentQuantity;
+        }
+        return sale;
+      });
+      localStorage.setItem('carrinho', JSON.stringify(newCart));
+    } else {
+      localStorage.setItem('carrinho', JSON.stringify([...cart, newSale]));
+    }
+  };
+
+  const addItem = () => {
     setTotalPrice(totalPrice + Number(price));
     setQuantity(quantity + 1);
+    addSaleLocalStorage(quantity + 1);
   };
 
   const rmItem = () => {
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
     setQuantity(quantity - 1);
     setTotalPrice(totalPrice - Number(price));
 
-    if (quantity <= 0) {
-      setTotalPrice(0);
-      setQuantity(0);
-    }
+    const newCart = cart.map((sale) => {
+      if (sale.name === name) {
+        sale.quantity -= 1;
+      }
+      return sale;
+    });
+
+    const removeSaleWithZeroQuatity = newCart.filter((sale) => sale.quantity !== 0);
+
+    localStorage.setItem('carrinho', JSON.stringify(removeSaleWithZeroQuatity));
   };
 
   return (
@@ -50,12 +79,13 @@ function Amount(props) {
       <input
         data-testid={ `customer_products__input-card-quantity-${index}` }
         value={ quantity }
-        readOnly
+        onChange={ (e) => addSaleLocalStorage(Number(e.target.value)) }
       />
       <button
         data-testid={ `customer_products__button-card-add-item-${index}` }
         type="button"
         onClick={ addItem }
+        disabled={ false }
       >
         +
       </button>
