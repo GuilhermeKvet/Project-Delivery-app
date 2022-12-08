@@ -7,17 +7,52 @@ import Button from '../../Components/Button';
 import Address from '../../Components/address details';
 import AppContext from '../../Context/AppContext';
 import TotalPriceButton from '../../Components/TotalPriceButton';
-// const navigate = useNavigate();
+import modelValue from '../../Utils/modelValue';
 
 function Pedidos() {
-  const { products, setProducts, totalPrice } = useContext(AppContext);
+  // const navigate = useNavigate();
+  const { products, setProducts, totalPrice, setTotalPrice } = useContext(AppContext);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     setProducts(cart);
-  }, [setProducts]);
+    setTotalPrice(
+      cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
+    );
+  }, [setProducts, setTotalPrice]);
 
-  const finishOrder = () => {};
+  const finishOrder = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const address = JSON.parse(localStorage.getItem('address'));
+    const url = 'http://localhost:3001/customer/orders';
+    const sales = products.map(() => {
+      const fields = {
+        user_id: user.id,
+        seller_id: address.vendedora,
+        total_price: modelValue(totalPrice),
+        delivery_address: address.endereco,
+        delivery_number: address.numero,
+        status: 'pendente',
+      };
+      return fields;
+    });
+
+    const body = JSON.stringify(sales);
+
+    const response = await fetch(url, {
+      body,
+      method: 'post',
+      headers: { 'Content-type': 'application/json' },
+    });
+
+    const id = await response.json();
+
+    if (response.ok === false) {
+      setError({ message: response.statusText, status: response.status });
+    } else {
+      navigate(`/customer/orders/${id}}`);
+    }
+  };
 
   return (
     <div>

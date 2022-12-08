@@ -18,9 +18,6 @@ function Amount(props) {
     } else {
       setQuantity(quantity);
     }
-    setTotalPrice(
-      cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
-    );
   }, [name, quantity, setTotalPrice, setProducts]);
 
   const addSaleLocalStorage = (currentQuantity) => {

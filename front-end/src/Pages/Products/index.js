@@ -6,7 +6,7 @@ import AppContext from '../../Context/AppContext';
 
 function Products() {
   const [bebidas, setBebidas] = useState([]);
-  const { totalPrice } = useContext(AppContext);
+  const { totalPrice, setTotalPrice, setProducts } = useContext(AppContext);
 
   useEffect(() => {
     const requestBebidas = async () => {
@@ -14,8 +14,15 @@ function Products() {
       const data = await response.json();
       setBebidas(data);
     };
+
+    const cart = JSON.parse(localStorage.getItem('carrinho'));
+    setProducts(cart);
+
+    setTotalPrice(
+      cart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
+    );
     requestBebidas();
-  }, []);
+  }, [setProducts, setTotalPrice]);
 
   return (
     <div>
