@@ -33,8 +33,9 @@ function Products() {
             key={ `${index}${bebida.name}` }
             index={ index + 1 }
             description={ bebida.name }
-            image={ bebida.url_image }
+            image={ bebida.urlImage }
             price={ bebida.price }
+            id={ bebida.id }
           />
         ))}
       </div>

@@ -2,25 +2,18 @@ function OrdersInProcess(prop) {
   const { orderId, totalPrice, data, status } = prop;
   return (
     <div>
-      <p data-testid="customer_orders__element-order-id-<id>">
+      <p data-testid={ `customer_orders__element-order-id-${orderId}` }>
         {`pedido ${orderId}`}
       </p>
-      <br />
-
-      <p data-testid="customer_orders__element-delivery-status-<id>">
+      <p data-testid={ `customer_orders__element-delivery-status-${orderId}` }>
         {status}
       </p>
-      <br />
-
-      <p data-testid="customer_orders__element-order-date-<id>">
+      <p data-testid={ `customer_orders__element-order-date-${orderId}` }>
         {`data ${data}`}
       </p>
-      <br />
-
-      <p data-testid="customer_orders__element-card-price-<id>">
+      <p data-testid={ `customer_orders__element-card-price-${orderId}` }>
         {`R$: ${totalPrice}`}
       </p>
-      <br />
     </div>
   );
 }

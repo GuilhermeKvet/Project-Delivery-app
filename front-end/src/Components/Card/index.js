@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Amount from '../Amount';
 
 function ItemCard(props) {
-  const { description, image, index, price } = props;
+  const { description, image, index, price, id } = props;
   return (
     <div>
       <div>
@@ -23,7 +23,7 @@ function ItemCard(props) {
       >
         {description}
       </h3>
-      <Amount index={ index } price={ price } name={ description } />
+      <Amount index={ index } price={ price } name={ description } id={ id } />
     </div>
   );
 }
@@ -33,6 +33,7 @@ ItemCard.defaultProps = {
   image: PropTypes.undefined,
   index: PropTypes.undefined,
   price: PropTypes.undefined,
+  id: PropTypes.undefined,
 };
 
 ItemCard.propTypes = {
@@ -40,6 +41,7 @@ ItemCard.propTypes = {
   image: PropTypes.string,
   index: PropTypes.number,
   price: PropTypes.string,
+  id: PropTypes.number,
 };
 
 export default ItemCard;

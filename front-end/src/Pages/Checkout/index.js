@@ -1,16 +1,15 @@
 import React, { useContext, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import OrderSale from '../../Components/OrderSale';
 import TableHeader from '../../Components/TableHeader';
 import Button from '../../Components/Button';
-import Address from '../../Components/address details';
+import Address from '../../Components/AddressDetails';
 import AppContext from '../../Context/AppContext';
 import TotalPriceButton from '../../Components/TotalPriceButton';
-import modelValue from '../../Utils/modelValue';
 
 function Pedidos() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { products, setProducts, totalPrice, setTotalPrice } = useContext(AppContext);
 
   useEffect(() => {
@@ -24,25 +23,29 @@ function Pedidos() {
   const finishOrder = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const address = JSON.parse(localStorage.getItem('address'));
-    const url = 'http://localhost:3001/customer/orders';
-    const sales = products.map(() => {
-      const fields = {
-        user_id: user.id,
-        seller_id: address.vendedora,
-        total_price: modelValue(totalPrice),
-        delivery_address: address.endereco,
-        delivery_number: address.numero,
-        status: 'pendente',
-      };
-      return fields;
-    });
 
-    const body = JSON.stringify(sales);
+    const url = 'http://localhost:3001/customer/orders';
+
+    const fields = {
+      userId: user.id,
+      sellerId: 1,
+      totalPrice: Number(totalPrice.toFixed(2)),
+      deliveryAddress: address.endereco,
+      deliveryNumber: address.numero,
+      status: 'pendente',
+    };
+
+    const orderProducts = products.map((product) => ({
+      productId: product.id,
+      quantity: product.quantity,
+    }));
+
+    const body = JSON.stringify({ fields, orderProducts });
 
     const response = await fetch(url, {
       body,
       method: 'post',
-      headers: { 'Content-type': 'application/json' },
+      headers: { 'Content-type': 'application/json', Authorization: user.token },
     });
 
     const id = await response.json();
@@ -50,7 +53,7 @@ function Pedidos() {
     if (response.ok === false) {
       setError({ message: response.statusText, status: response.status });
     } else {
-      navigate(`/customer/orders/${id}}`);
+      navigate(`/customer/orders/${id}`);
     }
   };
 

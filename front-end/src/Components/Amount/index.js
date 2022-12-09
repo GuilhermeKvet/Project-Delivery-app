@@ -5,7 +5,7 @@ import AppContext from '../../Context/AppContext';
 function Amount(props) {
   const { totalPrice, setTotalPrice, setProducts, products } = useContext(AppContext);
 
-  const { index, price, name } = props;
+  const { index, price, name, id } = props;
 
   const [quantity, setQuantity] = useState(0);
 
@@ -18,11 +18,11 @@ function Amount(props) {
     } else {
       setQuantity(quantity);
     }
-  }, [name, quantity, setTotalPrice, setProducts]);
+  }, [name, quantity, setProducts]);
 
   const addSaleLocalStorage = (currentQuantity) => {
     setQuantity(currentQuantity);
-    const newSale = { name, price, quantity: currentQuantity };
+    const newSale = { name, price, quantity: currentQuantity, id };
 
     if (products.length === 0) {
       localStorage.setItem('carrinho', JSON.stringify([newSale]));
@@ -74,7 +74,6 @@ function Amount(props) {
       </button>
       <input
         data-testid={ `customer_products__input-card-quantity-${index}` }
-        type="number"
         value={ quantity }
         onChange={ (e) => addSaleLocalStorage(Number(e.target.value)) }
       />
@@ -94,12 +93,14 @@ Amount.defaultProps = {
   index: PropTypes.undefined,
   price: PropTypes.undefined,
   name: PropTypes.undefined,
+  id: PropTypes.undefined,
 };
 
 Amount.propTypes = {
   index: PropTypes.number,
   price: PropTypes.string,
   name: PropTypes.string,
+  id: PropTypes.number,
 };
 
 export default Amount;
