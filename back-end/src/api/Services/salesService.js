@@ -1,4 +1,3 @@
-const snakeize = require('snakeize');
 const { Sales, SalesProducts } = require('../../database/models');
 
 const getAllSales = async () => {
@@ -13,7 +12,7 @@ const createSale = async (sales) => {
 
   await orderProducts.forEach(async (product) => {
     const obj = { ...product, saleId: dataValues.id };
-    await SalesProducts.create(snakeize(obj));
+    await SalesProducts.create(obj);
   });
   return dataValues.id;
 };

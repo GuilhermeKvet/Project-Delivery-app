@@ -1,17 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
   const Sales = sequelize.define('Sales', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id: { type: DataTypes.INTEGER, foreignKey: true },
-    seller_id: { type: DataTypes.INTEGER, foreignKey: true },
-    total_price: DataTypes.INTEGER,
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
-    sale_date: { type: DataTypes.DATEONLY, defaultValue: DataTypes.NOW },
+    userId: { type: DataTypes.INTEGER, foreignKey: true },
+    sellerId: { type: DataTypes.INTEGER, foreignKey: true },
+    totalPrice: DataTypes.INTEGER,
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: { type: DataTypes.DATEONLY, defaultValue: DataTypes.NOW },
     status: DataTypes.STRING,
   },
   {
     timestamps: false,
     tableName: 'sales',
+    underscored: true,
   });
 
   Sales.associate = (model) => {
