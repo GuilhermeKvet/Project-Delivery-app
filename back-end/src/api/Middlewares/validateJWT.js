@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const { join } = require('path');
 
-require('dotenv/config');
-
-const secret = 'secret_key';
+const JWT_SECRET = fs.readFileSync(join(__dirname, '../../../jwt.evaluation.key'));
 
 module.exports = async (req, res, next) => {
   const token = req.header('Authorization');
@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, JWT_SECRET);
 
     req.user = decoded;
 
