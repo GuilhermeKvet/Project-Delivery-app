@@ -22,16 +22,16 @@ function Pedidos() {
 
   const finishOrder = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const address = JSON.parse(localStorage.getItem('address'));
+    const buyInfo = JSON.parse(localStorage.getItem('buyInfo'));
 
     const url = 'http://localhost:3001/customer/orders';
 
     const fields = {
       userId: user.id,
-      sellerId: 1,
+      sellerId: buyInfo.sellerId,
       totalPrice: Number(totalPrice.toFixed(2)),
-      deliveryAddress: address.endereco,
-      deliveryNumber: address.numero,
+      deliveryAddress: buyInfo.address,
+      deliveryNumber: buyInfo.number,
       status: 'pendente',
     };
 
@@ -43,9 +43,12 @@ function Pedidos() {
     const body = JSON.stringify({ fields, orderProducts });
 
     const response = await fetch(url, {
-      body,
       method: 'post',
-      headers: { 'Content-type': 'application/json', Authorization: user.token },
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: user.token,
+      },
+      body,
     });
 
     const id = await response.json();
