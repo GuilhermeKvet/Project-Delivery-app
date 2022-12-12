@@ -1,24 +1,28 @@
 import PropTypes from 'prop-types';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppContext from '../../Context/AppContext';
 
 function Amount(props) {
-  const { totalPrice, setTotalPrice, setProducts, products } = useContext(AppContext);
-
-  const { index, price, name, id } = props;
+  const {
+    totalPrice,
+    setTotalPrice,
+    setProducts,
+    products,
+  } = useContext(AppContext);
 
   const [quantity, setQuantity] = useState(0);
 
+  const { index, price, name, id } = props;
+
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
-    setProducts(cart);
     const currentSale = cart.find((sale) => sale.name === name);
     if (currentSale) {
       setQuantity(currentSale.quantity);
     } else {
       setQuantity(quantity);
     }
-  }, [name, quantity, setProducts]);
+  }, [name, quantity]);
 
   const addSaleLocalStorage = (currentQuantity) => {
     setQuantity(currentQuantity);
@@ -26,6 +30,7 @@ function Amount(props) {
 
     if (products.length === 0) {
       localStorage.setItem('carrinho', JSON.stringify([newSale]));
+      setProducts([newSale]);
     }
     if (products.some((sale) => sale.name === name)) {
       const newCart = products.map((sale) => {
@@ -35,8 +40,10 @@ function Amount(props) {
         return sale;
       });
       localStorage.setItem('carrinho', JSON.stringify(newCart));
+      setProducts(newCart);
     } else {
       localStorage.setItem('carrinho', JSON.stringify([...products, newSale]));
+      setProducts([...products, newSale]);
     }
   };
 
@@ -60,6 +67,7 @@ function Amount(props) {
     const removeSaleWithZeroQuatity = newCart.filter((sale) => sale.quantity !== 0);
 
     localStorage.setItem('carrinho', JSON.stringify(removeSaleWithZeroQuatity));
+    setProducts(removeSaleWithZeroQuatity);
   };
 
   return (
