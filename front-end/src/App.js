@@ -7,6 +7,7 @@ import Home from './Pages/Home';
 import Products from './Pages/Products';
 import Pedidos from './Pages/customerOrder';
 import Checkout from './Pages/Checkout';
+import OrderDetails from './Pages/OrderDetails';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route exact path="/customer/checkout" element={ <Checkout /> } />
         <Route exact path="/customer/orders" element={ <Pedidos /> } />
+        <Route exact path="/customer/orders/detail" element={ <OrderDetails /> } />
         <Route exact path="/customer/products" element={ <Products /> } />
         <Route exact path="/register" element={ <Register /> } />
         <Route exact path="/login" element={ <Login /> } />

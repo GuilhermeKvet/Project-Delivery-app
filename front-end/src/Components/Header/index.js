@@ -14,11 +14,16 @@ function Header() {
     navigate('/login');
   };
 
+  const productsPage = () => {
+    navigate('/customer/products');
+  };
+
   return (
     <header id="RegisterComponent">
       <Button
         testId="customer_products__element-navbar-link-products"
         text="PRODUTOS"
+        exec={ productsPage }
       />
       <Button
         testId="customer_products__element-navbar-link-orders"

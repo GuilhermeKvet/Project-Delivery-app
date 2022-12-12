@@ -1,4 +1,6 @@
-function TableHeader() {
+function TableHeader(prop) {
+  const { isEditable } = prop;
+
   return (
     <thead>
       <tr>
@@ -7,7 +9,8 @@ function TableHeader() {
         <th>Quantidade</th>
         <th>Valor Unitário</th>
         <th>Sub-total</th>
-        <th>Remover Item</th>
+        {isEditable
+        && (<th>Remover Item</th>)}
       </tr>
     </thead>
   );
