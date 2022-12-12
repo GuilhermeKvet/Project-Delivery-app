@@ -63,7 +63,7 @@ function Pedidos() {
       <div>
         <h2>Finalizar Pedido</h2>
         <table>
-          <TableHeader />
+          <TableHeader isEditable />
           <tbody>
             {products.map((sale, index) => (
               <OrderSale
