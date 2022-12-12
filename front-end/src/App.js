@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/customer/checkout" element={ <Checkout /> } />
+        <Route exact path="/customer/orders/:id" element={ <Pedidos /> } />
         <Route exact path="/customer/orders" element={ <Pedidos /> } />
         <Route exact path="/customer/orders/detail" element={ <OrderDetails /> } />
         <Route exact path="/customer/products" element={ <Products /> } />

@@ -22,8 +22,8 @@ function CustomersOrders() {
           <OrdersInProcess
             key={ s.id }
             orderId={ s.id }
-            totalPrice={ s.total_price }
-            data={ s.sale_data }
+            totalPrice={ s.totalPrice }
+            data={ s.saleDate }
             status={ s.status }
           />
         ))}

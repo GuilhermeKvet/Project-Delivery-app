@@ -5,13 +5,16 @@ import modelValue from '../../Utils/modelValue';
 function OrderSale(prop) {
   const { index, price, name, quantity, isEditable } = prop;
 
-  const { setProducts } = useContext(AppContext);
+  const { setProducts, setTotalPrice } = useContext(AppContext);
 
   const rmItem = () => {
     const cart = JSON.parse(localStorage.getItem('carrinho'));
     const newCart = cart.filter((sale) => sale.name !== name);
     localStorage.setItem('carrinho', JSON.stringify(newCart));
     setProducts(newCart);
+    setTotalPrice(
+      newCart.reduce((acc, sale) => acc + (Number(sale.price) * sale.quantity), 0),
+    );
   };
 
   return (

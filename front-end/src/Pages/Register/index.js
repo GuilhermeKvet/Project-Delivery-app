@@ -26,9 +26,12 @@ function Register() {
       headers: { 'Content-type': 'application/json' },
     });
 
+    const user = await response.json();
+
     if (response.ok === false) {
       setError({ message: response.statusText, status: response.status });
     } else {
+      localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('carrinho', JSON.stringify([]));
       navigate('/customer/products');
     }
