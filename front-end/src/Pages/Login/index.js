@@ -7,13 +7,6 @@ import Input from '../../Components/Input';
 function Login() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const hasLogin = JSON.parse(localStorage.getItem('user'));
-    if (hasLogin) {
-      navigate('/customer/products');
-    }
-  }, [navigate]);
-
   const {
     email,
     password,
@@ -21,6 +14,21 @@ function Login() {
     setError,
     setName,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    const request = async () => {
+      const response = await fetch('http://localhost:3001/login');
+      const data = response.json();
+      const user = data.find((item) => item.email === email);
+      return user;
+    };
+    if (request) {
+      const { role } = hasLogin;
+      setName(hasLogin.name);
+      if (role === 'customer') navigate('/customer/products');
+      if (role === 'seller') navigate('/seller/sales');
+    }
+  }, [navigate, setName, email]);
 
   const request = async () => {
     const url = 'http://localhost:3001/login';
@@ -39,9 +47,11 @@ function Login() {
       setError({ message: response.statusText, status: response.status });
     } else {
       setName(user.name);
+      const { role } = user;
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('carrinho', JSON.stringify([]));
-      navigate('/customer/products');
+      if (role === 'customer') navigate('/customer/products');
+      if (role === 'seller') navigate('/seller/sales');
     }
   };
 
