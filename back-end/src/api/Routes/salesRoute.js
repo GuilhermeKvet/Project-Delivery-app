@@ -7,5 +7,6 @@ const router = Router();
 router.get('/', salesController.getAllSales);
 router.get('/:id', salesController.getSaleById);
 router.post('/', validateJWT, salesController.createSale);
+router.post('/:id/status', validateJWT, salesController.changeStatus);
 
 module.exports = router;

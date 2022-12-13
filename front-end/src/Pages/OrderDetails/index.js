@@ -19,10 +19,25 @@ function OrderDetails() {
       const data = await response.json();
       setSale(data);
       setProducts(data.products);
-      console.log(data);
     };
     request();
   }, [id]);
+
+  const delivered = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const url = `http://localhost:3001/customer/orders/${id}/status`;
+    const response = await fetch(url, {
+      body: JSON.stringify({ status: 'Entregue' }),
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: user.token,
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    setSale(data);
+  };
 
   return (
     <div>
@@ -36,6 +51,7 @@ function OrderDetails() {
           status={ sale.status }
           data={ sale.saleDate }
           totalPrice={ sale.totalPrice }
+          changeStatus={ delivered }
         />
         <table>
           <TableHeader />
