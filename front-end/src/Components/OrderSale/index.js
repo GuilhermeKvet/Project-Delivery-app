@@ -3,7 +3,7 @@ import AppContext from '../../Context/AppContext';
 import modelValue from '../../Utils/modelValue';
 
 function OrderSale(prop) {
-  const { index, price, name, quantity, isEditable } = prop;
+  const { index, price, name, quantity, isEditable, page } = prop;
 
   const { setProducts, setTotalPrice } = useContext(AppContext);
 
@@ -20,27 +20,47 @@ function OrderSale(prop) {
   return (
     <tr>
       <td
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+        data-testid={
+          page === 'checkout'
+            ? `customer_checkout__element-order-table-item-number-${index}`
+            : `customer_order_details__element-order-table-item-number-${index}`
+        }
       >
         {index + 1}
       </td>
       <td
-        data-testid={ `customer_checkout__element-order-table-name-${index}` }
+        data-testid={
+          page === 'checkout'
+            ? `customer_checkout__element-order-table-name-${index}`
+            : `customer_order_details__element-order-table-name-${index}`
+        }
       >
         {name}
       </td>
       <td
-        data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+        data-testid={
+          page === 'checkout'
+            ? `customer_checkout__element-order-table-quantity-${index}`
+            : `customer_order_details__element-order-table-quantity-${index}`
+        }
       >
         {quantity}
       </td>
       <td
-        data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
+        data-testid={
+          page === 'checkout'
+            ? `customer_checkout__element-order-table-unit-price-${index}`
+            : `customer_order_details__element-order-table-unit-price-${index}`
+        }
       >
         {modelValue(Number(price))}
       </td>
       <td
-        data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+        data-testid={
+          page === 'checkout'
+            ? `customer_checkout__element-order-table-sub-total-${index}`
+            : `customer_order_details__element-order-table-sub-total-${index}`
+        }
       >
         {modelValue(Number(price * quantity))}
       </td>

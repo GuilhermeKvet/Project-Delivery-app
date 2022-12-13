@@ -32,7 +32,7 @@ function Pedidos() {
       totalPrice: Number(totalPrice.toFixed(2)),
       deliveryAddress: buyInfo.address,
       deliveryNumber: buyInfo.number,
-      status: 'pendente',
+      status: 'Pendente',
     };
 
     const orderProducts = products.map((product) => ({
@@ -70,6 +70,7 @@ function Pedidos() {
           <tbody>
             {products.map((sale, index) => (
               <OrderSale
+                page="checkout"
                 key={ `${sale.name}${index}` }
                 index={ index }
                 name={ sale.name }

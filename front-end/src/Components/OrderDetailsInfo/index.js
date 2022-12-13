@@ -2,17 +2,18 @@ function OrderDetailsInfo(prop) {
   const { orderId, totalPrice, data, status, sellerName } = prop;
   return (
     <div>
-      <span data-testid="customer_order_details__element-order-details-label-order-id">
-        {`pedido ${orderId}`}
+      <span
+        data-testid="customer_order_details__element-order-details-label-order-id"
+      >
+        {`pedido 000${orderId}`}
       </span>
       &nbsp;
       <span data-testid="customer_order_details__element-order-details-label-seller-name">
-        {`P. Vend: ${sellerName}`}
+        {`${sellerName}`}
       </span>
       &nbsp;
       <span
-        data-testid="customer_order_details__element-order-details
-      -label-delivery-status"
+        data-testid="customer_order_details__element-order-details-label-delivery-status"
       >
         {status}
       </span>
@@ -24,6 +25,13 @@ function OrderDetailsInfo(prop) {
       <span data-testid="customer_order_details__element-order-total-price">
         {`R$: ${totalPrice}`}
       </span>
+      <button
+        type="button"
+        data-testid="customer_order_details__button-delivery-check"
+        disabled={ status !== 'entregue' }
+      >
+        MARCAR COMO ENTREGUE
+      </button>
     </div>
   );
 }

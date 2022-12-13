@@ -2,22 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
-// import OrderSale from '../../Components/OrderSale';
+import OrderSale from '../../Components/OrderSale';
 import TableHeader from '../../Components/TableHeader';
-// import AppContext from '../../Context/AppContext';
 import OrderDetailsInfo from '../../Components/OrderDetailsInfo';
-// const navigate = useNavigate();
 
 function OrderDetails() {
+  // const navigate = useNavigate();
+
   const [sale, setSale] = useState([]);
+  const [products, setProducts] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(id);
     const request = async () => {
       const response = await fetch(`http://localhost:3001/customer/orders/${id}`);
       const data = await response.json();
       setSale(data);
+      setProducts(data.products);
+      console.log(data);
     };
     request();
   }, [id]);
@@ -30,14 +32,25 @@ function OrderDetails() {
         <OrderDetailsInfo
           key={ sale.id }
           orderId={ sale.id }
-          sellerName={ sale.sellerName } // Só exemplo, vai ter que mudar depois, eu acho
-          totalPrice={ sale.totalPrice }
-          data={ sale.saleDate }
+          sellerName={ sale.sellerId }
           status={ sale.status }
+          data={ sale.saleDate }
+          totalPrice={ sale.totalPrice }
         />
         <table>
           <TableHeader />
-          <tbody />
+          <tbody>
+            {products.map((s, index) => (
+              <OrderSale
+                page="order-details"
+                key={ `${s.name}${index}` }
+                index={ index }
+                name={ s.name }
+                price={ s.price }
+                quantity={ s.SalesProducts.quantity }
+              />
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

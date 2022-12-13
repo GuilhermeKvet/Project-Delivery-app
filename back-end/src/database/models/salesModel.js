@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.INTEGER,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
-    saleDate: { type: DataTypes.DATEONLY, defaultValue: DataTypes.NOW },
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: DataTypes.STRING,
   },
   {
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sales.associate = (model) => {
-    Sales.belongsTo(model.User, { foreignKey: 'user_id', as: 'user' });
+    Sales.belongsTo(model.User, { foreignKey: 'userId', as: 'user' });
   };
 
   return Sales;

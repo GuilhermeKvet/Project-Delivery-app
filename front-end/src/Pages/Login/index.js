@@ -1,10 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
 
 function Login() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hasLogin = JSON.parse(localStorage.getItem('user'));
+    if (hasLogin) {
+      navigate('/customer/products');
+    }
+  }, [navigate]);
+
   const {
     email,
     password,
@@ -12,8 +21,6 @@ function Login() {
     setError,
     setName,
   } = useContext(AppContext);
-
-  const navigate = useNavigate();
 
   const request = async () => {
     const url = 'http://localhost:3001/login';
