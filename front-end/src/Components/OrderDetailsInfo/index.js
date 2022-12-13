@@ -1,5 +1,5 @@
 function OrderDetailsInfo(prop) {
-  const { orderId, totalPrice, data, status, sellerName } = prop;
+  const { orderId, totalPrice, data, status, sellerName, changeStatus } = prop;
   return (
     <div>
       <span
@@ -28,7 +28,8 @@ function OrderDetailsInfo(prop) {
       <button
         type="button"
         data-testid="customer_order_details__button-delivery-check"
-        disabled={ status !== 'entregue' }
+        onClick={ changeStatus }
+        // disabled={ status !== 'entregue' }
       >
         MARCAR COMO ENTREGUE
       </button>

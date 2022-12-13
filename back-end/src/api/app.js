@@ -18,6 +18,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/customer/products', customerRoute);
 app.use('/customer/orders', salesRoute);
+app.use('/seller/orders', salesRoute);
 app.use('/sellers', sellersRoute);
 
 app.use(errorMiddleware);

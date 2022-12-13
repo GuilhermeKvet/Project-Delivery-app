@@ -9,9 +9,6 @@ const includeInfo = {
       attributes: { exclude: ['id', 'urlImage'] },
     },
   ],
-  attributes: { 
-    exclude: ['deliveryAddress', 'deliveryNumber'], 
-  },
 };
 
 const getAllSales = async () => {
@@ -25,6 +22,12 @@ const getSaleById = async (id) => {
   if (!sale) throw new HttpException(404, 'Not found');
 
   return { ...sale.dataValues };
+};
+
+const changeStatus = async (id, status) => {
+  await Sales.update({ status }, { where: { id } });
+  const saleUpdated = await Sales.findByPk(id, { ...includeInfo });
+  return saleUpdated;
 };
 
 const createSale = async (sales) => {
@@ -44,4 +47,5 @@ module.exports = {
   getAllSales,
   getSaleById,
   createSale,
+  changeStatus,
 };
