@@ -49,7 +49,7 @@ module.exports = {
       saleDate: {
         allowNull: false,
         field: 'sale_date',
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       },
       status: {

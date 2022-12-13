@@ -29,13 +29,15 @@ const getSaleById = async (id) => {
 
 const createSale = async (sales) => {
   const { fields, orderProducts } = sales;
-
+  console.log(fields);
+  console.log(orderProducts);
   const { dataValues } = await Sales.create(fields);
 
-  await orderProducts.forEach(async (product) => {
+  await Promise.all(orderProducts.map(async (product) => {
     const obj = { ...product, saleId: dataValues.id };
     await SalesProducts.create(obj);
-  });
+  }));
+
   return dataValues.id;
 };
 

@@ -9,13 +9,15 @@ function Header() {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('carrinho');
     navigate('/login');
   };
 
   const productsPage = () => {
     navigate('/customer/products');
+  };
+
+  const orderPage = () => {
+    navigate('/customer/orders');
   };
 
   return (
@@ -28,6 +30,7 @@ function Header() {
       <Button
         testId="customer_products__element-navbar-link-orders"
         text="PEDIDOS"
+        exec={ orderPage }
       />
       <Button
         testId="customer_products__element-navbar-user-full-name"
