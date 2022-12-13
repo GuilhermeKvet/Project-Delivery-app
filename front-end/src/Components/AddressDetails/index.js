@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
 function Address() {
-  const selectValues = [
-    {
-      id: 1,
-      name: 'Fulana Pereira',
-      email: 'fulana@deliveryapp.com',
-    }];
+  const [sellers, setSellers] = useState([]);
 
   const [buyInfo, setBuyInfo] = useState({
-    sellerId: selectValues[0].id,
+    sellerId: 0,
     address: '',
     number: '',
   });
+
+  useEffect(() => {
+    const request = async () => {
+      const response = await fetch('http://localhost:3001/sellers');
+      const data = await response.json();
+      setBuyInfo((prevState) => ({ ...prevState, sellerId: data[0].id }));
+      setSellers(data);
+    };
+
+    request();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('buyInfo', JSON.stringify(buyInfo));
@@ -41,7 +47,7 @@ function Address() {
           id="customerSelect"
           data-testid="customer_checkout__select-seller"
         >
-          {selectValues.map((valor, index) => (
+          {sellers.map((valor, index) => (
             <option
               value={ valor.id }
               key={ `${index}` }
@@ -73,5 +79,13 @@ function Address() {
     </div>
   );
 }
+
+// Address.defaultProps = {
+//   sellers: PropTypes.undefined,
+// };
+
+// Address.propTypes = {
+//   sellers: PropTypes.arrayOf,
+// };
 
 export default Address;
