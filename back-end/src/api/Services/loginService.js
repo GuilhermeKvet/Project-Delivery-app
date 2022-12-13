@@ -3,6 +3,11 @@ const { User } = require('../../database/models');
 const { validateLogin } = require('../Validations/loginValidation');
 const { generateToken } = require('../Utils/generateToken');
 
+const getAllUsers = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
 const login = async (email, password) => {
   const user = await User.findOne({ where: { email } });
   
@@ -21,4 +26,5 @@ const login = async (email, password) => {
 
 module.exports = {
   login,
+  getAllUsers,
 };
