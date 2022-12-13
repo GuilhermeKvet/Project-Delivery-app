@@ -1,50 +1,65 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 function SaleCard(props) {
-  const { saleNumber, status, date, value, adress } = props;
+  const navigate = useNavigate();
+  const { saleNumber, status, date, value, adress, deliveryNumber } = props;
 
   return (
-    <div className="SaleCard">
-      <div className="SaleNumber" data-testid="seller_orders__element-order-id-<id>">
-        Pedido
+    <button
+      type="button"
+      onClick={ () => navigate(`/seller/orders/${saleNumber}`) }
+    >
+      <p
+        className="SaleId"
+        data-testid={ `seller_orders__element-order-id--${saleNumber}` }
+      >
         { saleNumber }
-      </div>
-      <div className="SaleInfo">
-        <div
-          className="Status"
-          data-testid="seller_orders__element-delivery-status-<id>"
-        >
-          { status }
-        </div>
-        <div
-          className="Date"
-          data-testid="seller_orders__element-order-date-<id>"
-        >
-          { date }
-        </div>
-        <div
-          className="Value"
-          data-testid="seller_orders__element-card-price-<id>"
-        >
-          { value }
-        </div>
-        <div
-          className="Adress"
-          data-testid="seller_orders__element-card-address-<id>"
-        >
-          { adress }
-        </div>
-      </div>
-    </div>
+      </p>
+      <p
+        className="Status"
+        data-testid={ `seller_orders__element-delivery-status-${saleNumber}` }
+      >
+        { status }
+      </p>
+      <p
+        className="Date"
+        data-testid={ `seller_orders__element-order-date-${saleNumber}` }
+      >
+        { date }
+      </p>
+      <p
+        className="Value"
+        data-testid={ `seller_orders__element-card-price-${saleNumber}` }
+      >
+        { value }
+      </p>
+      <p
+        className="Adress"
+        data-testid={ `seller_orders__element-card-address-${saleNumber}` }
+      >
+        { `${adress}${deliveryNumber}` }
+      </p>
+    </button>
   );
 }
 
+SaleCard.defaultProps = {
+  saleNumber: PropTypes.undefined,
+  status: PropTypes.undefined,
+  date: PropTypes.undefined,
+  value: PropTypes.undefined,
+  adress: PropTypes.undefined,
+  deliveryNumber: PropTypes.undefined,
+};
+
 SaleCard.propTypes = {
-  saleNumber: PropTypes.number.isRequired,
-  status: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  adress: PropTypes.string.isRequired,
+  saleNumber: PropTypes.number,
+  status: PropTypes.string,
+  date: PropTypes.string,
+  value: PropTypes.number,
+  adress: PropTypes.string,
+  deliveryNumber: PropTypes.string,
 };
 
 export default SaleCard;

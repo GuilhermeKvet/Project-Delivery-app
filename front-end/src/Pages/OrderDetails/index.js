@@ -35,7 +35,6 @@ function OrderDetails() {
       },
     });
     const data = await response.json();
-    console.log(data);
     setSale(data);
   };
 

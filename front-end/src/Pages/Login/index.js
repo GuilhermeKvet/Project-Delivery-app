@@ -26,7 +26,7 @@ function Login() {
           const { role, name } = user;
           setName(name);
           if (role === 'customer') navigate('/customer/products');
-          if (role === 'seller') navigate('/seller/sales');
+          if (role === 'seller') navigate('/seller/orders');
         }
       }
     };
@@ -54,7 +54,7 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('carrinho', JSON.stringify([]));
       if (role === 'customer') navigate('/customer/products');
-      if (role === 'seller') navigate('/seller/sales');
+      if (role === 'seller') navigate('/seller/orders');
     }
   };
 
