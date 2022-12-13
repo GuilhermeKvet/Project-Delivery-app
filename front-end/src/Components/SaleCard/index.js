@@ -5,15 +5,35 @@ function SaleCard(props) {
 
   return (
     <div className="SaleCard">
-      <div className="SaleNumber">
+      <div className="SaleNumber" data-testid="seller_orders__element-order-id-<id>">
         Pedido
         { saleNumber }
       </div>
       <div className="SaleInfo">
-        <div className="Status">{ status }</div>
-        <div className="Date">{ date }</div>
-        <div className="Value">{ value }</div>
-        <div className="Adress">{ adress }</div>
+        <div
+          className="Status"
+          data-testid="seller_orders__element-delivery-status-<id>"
+        >
+          { status }
+        </div>
+        <div
+          className="Date"
+          data-testid="seller_orders__element-order-date-<id>"
+        >
+          { date }
+        </div>
+        <div
+          className="Value"
+          data-testid="seller_orders__element-card-price-<id>"
+        >
+          { value }
+        </div>
+        <div
+          className="Adress"
+          data-testid="seller_orders__element-card-address-<id>"
+        >
+          { adress }
+        </div>
       </div>
     </div>
   );

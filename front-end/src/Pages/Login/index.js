@@ -23,8 +23,8 @@ function Login() {
       return user;
     };
     if (request) {
-      const { role } = hasLogin;
-      setName(hasLogin.name);
+      const { role, name } = request;
+      setName(name);
       if (role === 'customer') navigate('/customer/products');
       if (role === 'seller') navigate('/seller/sales');
     }
