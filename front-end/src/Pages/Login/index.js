@@ -18,16 +18,18 @@ function Login() {
   useEffect(() => {
     const request = async () => {
       const response = await fetch('http://localhost:3001/login');
-      const data = response.json();
+      const data = await response.json();
       const user = data.find((item) => item.email === email);
-      return user;
+
+      if (user) {
+        const { role, name } = user;
+        console.log(user);
+        setName(name);
+        if (role === 'customer') navigate('/customer/products');
+        if (role === 'seller') navigate('/seller/sales');
+      }
     };
-    if (request) {
-      const { role } = hasLogin;
-      setName(hasLogin.name);
-      if (role === 'customer') navigate('/customer/products');
-      if (role === 'seller') navigate('/seller/sales');
-    }
+    request();
   }, [navigate, setName, email]);
 
   const request = async () => {
