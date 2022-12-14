@@ -62,7 +62,9 @@ function Pedidos() {
 
   return (
     <div>
-      <Header />
+      <Header
+        orderPageRoute="/customer/orders"
+      />
       <div>
         <h2>Finalizar Pedido</h2>
         <table>

@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '../Button';
 import AppContext from '../../Context/AppContext';
 
-function Header() {
+function Header(props) {
   const { name } = useContext(AppContext);
+  const { orderPageRoute } = props;
 
   const navigate = useNavigate();
 
@@ -18,7 +20,7 @@ function Header() {
   };
 
   const orderPage = () => {
-    navigate('/customer/orders');
+    navigate(`${orderPageRoute}`);
   };
 
   return (
@@ -45,5 +47,9 @@ function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  orderPageRoute: PropTypes.string.isRequired,
+};
 
 export default Header;

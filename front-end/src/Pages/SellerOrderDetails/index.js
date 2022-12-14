@@ -40,7 +40,9 @@ function SaleOrderDetails() {
 
   return (
     <div>
-      <Header />
+      <Header
+        orderPageRoute="/seller/orders"
+      />
       <div>
         <h2>Detalhes do Pedido</h2>
         <OrderDetailsInfo
