@@ -6,7 +6,7 @@ import TableHeader from '../../Components/TableHeader';
 import OrderDetailsInfo from '../../Components/OrderDetailsInfo';
 import Button from '../../Components/Button';
 
-function OrderDetails() {
+function SaleOrderDetails() {
   const [sale, setSale] = useState([]);
   const [products, setProducts] = useState([]);
   const [sallerName, setSallerName] = useState([]);
@@ -23,11 +23,11 @@ function OrderDetails() {
     request();
   }, [id]);
 
-  const changeStatus = async () => {
+  const changeStatus = async (status) => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const url = `http://localhost:3001/customer/orders/${id}/status`;
+    const url = `http://localhost:3001/seller/orders/${id}/status`;
     const response = await fetch(url, {
-      body: JSON.stringify({ status: 'Entregue' }),
+      body: JSON.stringify({ status }),
       method: 'post',
       headers: {
         'Content-type': 'application/json',
@@ -44,7 +44,7 @@ function OrderDetails() {
       <div>
         <h2>Detalhes do Pedido</h2>
         <OrderDetailsInfo
-          page="customer_order_details"
+          page="seller_order_details"
           key={ sale.id }
           orderId={ sale.id }
           sellerName={ sallerName }
@@ -53,17 +53,23 @@ function OrderDetails() {
           totalPrice={ sale.totalPrice }
         />
         <Button
-          text="MARCAR COMO ENTREGUE"
-          testId="customer_order_details__button-delivery-check"
-          exec={ changeStatus }
-          disable={ sale.status !== 'Em Trânsito' }
+          text="PREPARAR PEDIDO"
+          testId="seller_order_details__button-preparing-check"
+          exec={ () => changeStatus('Preparando') }
+          disable={ sale.status !== 'Pendente' }
+        />
+        <Button
+          text="SAIU PARA ENTREGA"
+          testId="seller_order_details__button-dispatch-check"
+          exec={ () => changeStatus('Em Trânsito') }
+          disable={ sale.status !== 'Preparando' }
         />
         <table>
           <TableHeader />
           <tbody>
             {products.map((s, index) => (
               <OrderSale
-                page="customer_order_details"
+                page="seller_order_details"
                 key={ `${s.name}${index}` }
                 index={ index }
                 name={ s.name }
@@ -78,4 +84,4 @@ function OrderDetails() {
   );
 }
 
-export default OrderDetails;
+export default SaleOrderDetails;
