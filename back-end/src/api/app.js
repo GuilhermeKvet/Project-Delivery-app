@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 require('express-async-errors');
-const { loginRoute, registerRoute, customerRoute, sellersRoute } = require('./Routes');
+const { loginRoute, productsRoute, userRoute } = require('./Routes');
 const salesRoute = require('./Routes/salesRoute');
 const errorMiddleware = require('./Middlewares/errorMiddleware');
 
@@ -14,12 +14,11 @@ app.use(express.static('public'));
 app.use(cors());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-app.use('/login', loginRoute);
-app.use('/register', registerRoute);
-app.use('/customer/products', customerRoute);
+app.use('/', loginRoute);
+app.use('/customer/products', productsRoute);
 app.use('/customer/orders', salesRoute);
 app.use('/seller/orders', salesRoute);
-app.use('/sellers', sellersRoute);
+app.use('/', userRoute);
 
 app.use(errorMiddleware);
 
