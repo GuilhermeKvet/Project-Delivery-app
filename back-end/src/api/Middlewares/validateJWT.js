@@ -12,9 +12,9 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const { role } = jwt.verify(token, JWT_SECRET);
 
-    req.user = decoded;
+    req.role = role;
 
     next();
   } catch (err) {
