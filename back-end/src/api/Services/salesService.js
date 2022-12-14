@@ -1,4 +1,4 @@
-const { Sales, SalesProducts, Products } = require('../../database/models');
+const { User, Sales, SalesProducts, Products } = require('../../database/models');
 const HttpException = require('../Helpers/httpError');
 
 const includeInfo = {
@@ -7,6 +7,11 @@ const includeInfo = {
       model: Products,
       as: 'products', 
       attributes: { exclude: ['id', 'urlImage'] },
+    },
+    { 
+      model: User,
+      as: 'seller',
+      attributes: { exclude: ['id', 'email', 'password', 'role'] },
     },
   ],
 };

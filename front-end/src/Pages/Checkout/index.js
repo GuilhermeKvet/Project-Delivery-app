@@ -70,7 +70,7 @@ function Pedidos() {
           <tbody>
             {products.map((sale, index) => (
               <OrderSale
-                page="checkout"
+                page="customer_checkout"
                 key={ `${sale.name}${index}` }
                 index={ index }
                 name={ sale.name }

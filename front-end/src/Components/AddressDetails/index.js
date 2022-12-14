@@ -80,12 +80,4 @@ function Address() {
   );
 }
 
-// Address.defaultProps = {
-//   sellers: PropTypes.undefined,
-// };
-
-// Address.propTypes = {
-//   sellers: PropTypes.arrayOf,
-// };
-
 export default Address;
