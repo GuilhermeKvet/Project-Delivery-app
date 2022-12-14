@@ -26,7 +26,9 @@ function Products() {
 
   return (
     <div>
-      <Header />
+      <Header
+        orderPageRoute="/customer/orders"
+      />
       <div>
         { bebidas.map((bebida, index) => (
           <ItemCard

@@ -16,7 +16,9 @@ function CustomersOrders() {
 
   return (
     <div>
-      <Header />
+      <Header
+        orderPageRoute="/customer/orders"
+      />
       <div>
         {sales.map((s) => (
           <OrdersInProcess
@@ -27,7 +29,6 @@ function CustomersOrders() {
             status={ s.status }
           />
         ))}
-        {console.log(sales)}
       </div>
     </div>
   );

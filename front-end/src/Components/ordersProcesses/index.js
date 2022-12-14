@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import dateFormat from '../../Utils/dateFormat';
 
 function OrdersInProcess(prop) {
   const { orderId, totalPrice, data, status } = prop;
@@ -14,7 +15,7 @@ function OrdersInProcess(prop) {
         {status}
       </p>
       <p data-testid={ `customer_orders__element-order-date-${orderId}` }>
-        {`data ${data}`}
+        {`data ${dateFormat(data)}`}
       </p>
       <p data-testid={ `customer_orders__element-card-price-${orderId}` }>
         {`R$: ${totalPrice}`}
