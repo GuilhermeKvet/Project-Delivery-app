@@ -42,6 +42,7 @@ function OrderDetails() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
+        text="PEDIDOS"
       />
       <div>
         <h2>Detalhes do Pedido</h2>

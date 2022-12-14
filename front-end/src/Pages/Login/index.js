@@ -18,15 +18,16 @@ function Login() {
   useEffect(() => {
     const request = async () => {
       const hasLogin = JSON.parse(localStorage.getItem('user'));
-      const response = await fetch('http://localhost:3001/login');
+      const response = await fetch('http://localhost:3001/users');
       const data = await response.json();
       if (hasLogin) {
         const user = data.find((item) => item.email === hasLogin.email);
         if (user) {
           const { role, name } = user;
           setName(name);
-          if (role === 'customer') navigate('/customer/products');
+          if (role === 'administrator') navigate('/admin/manage');
           if (role === 'seller') navigate('/seller/orders');
+          navigate('/customer/products');
         }
       }
     };
@@ -55,6 +56,7 @@ function Login() {
       localStorage.setItem('carrinho', JSON.stringify([]));
       if (role === 'customer') navigate('/customer/products');
       if (role === 'seller') navigate('/seller/orders');
+      if (role === 'administrator') navigate('/admin/manage');
     }
   };
 

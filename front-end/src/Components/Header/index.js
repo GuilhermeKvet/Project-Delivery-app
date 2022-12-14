@@ -6,7 +6,7 @@ import AppContext from '../../Context/AppContext';
 
 function Header(props) {
   const { name } = useContext(AppContext);
-  const { orderPageRoute } = props;
+  const { orderPageRoute, text } = props;
 
   const navigate = useNavigate();
 
@@ -25,16 +25,23 @@ function Header(props) {
 
   return (
     <header id="RegisterComponent">
-      <Button
+      { text === 'PRODUTOS' ? <Button
         testId="customer_products__element-navbar-link-products"
-        text="PRODUTOS"
+        text={ text }
         exec={ productsPage }
-      />
-      <Button
+      /> : null }
+
+      { text === 'PEDIDOS' ? <Button
         testId="customer_products__element-navbar-link-orders"
-        text="PEDIDOS"
+        text={ text }
         exec={ orderPage }
-      />
+      /> : null }
+
+      { text === 'GERENCIAR USUÁRIOS' ? <Button
+        testId="customer_products__element-navbar-link-orders"
+        text={ text }
+        exec={ () => console.log('catapoing') }
+      /> : null }
       <Button
         testId="customer_products__element-navbar-user-full-name"
         text={ `${name}` }
@@ -50,6 +57,7 @@ function Header(props) {
 
 Header.propTypes = {
   orderPageRoute: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default Header;
