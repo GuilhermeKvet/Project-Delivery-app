@@ -18,18 +18,21 @@ function HomeSeller() {
     <div>
       <Header
         orderPageRoute="/seller/orders"
-        text="PEDIDOS"
+        page="seller"
       />
       <div>
-        { sales.map((item, index) => (<SaleCard
-          saleNumber={ item.id }
-          status={ item.status }
-          date={ item.saleDate }
-          value={ Number(item.totalPrice) }
-          adress={ item.deliveryAddress }
-          deliveryNumber={ item.deliveryNumber }
-          key={ index }
-        />))}
+        { sales.map((order, index) => (
+          <SaleCard
+            page="seller"
+            key={ index }
+            orderId={ order.id }
+            date={ order.saleDate }
+            totalPrice={ Number(order.totalPrice) }
+            status={ order.status }
+            adress={ order.deliveryAddress }
+            deliveryNumber={ order.deliveryNumber }
+          />
+        ))}
       </div>
     </div>
   );

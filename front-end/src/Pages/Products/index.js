@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ItemCard from '../../Components/Card';
+import ItemCard from '../../Components/ProductCard';
 import Header from '../../Components/Header';
 import TotalPriceButton from '../../Components/TotalPriceButton';
 import AppContext from '../../Context/AppContext';
@@ -28,7 +28,7 @@ function Products() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PRODUTOS"
+        page="customer"
       />
       <div>
         { bebidas.map((bebida, index) => (

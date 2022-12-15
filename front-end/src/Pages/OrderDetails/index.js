@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../Components/Header';
-import OrderSale from '../../Components/OrderSale';
-import TableHeader from '../../Components/TableHeader';
+import OrderRow from '../../Components/OrderRow';
+import TableOrderHeader from '../../Components/TableOrderHeader';
 import OrderDetailsInfo from '../../Components/OrderDetailsInfo';
 import Button from '../../Components/Button';
 
@@ -42,7 +42,7 @@ function OrderDetails() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PEDIDOS"
+        page="customer"
       />
       <div>
         <h2>Detalhes do Pedido</h2>
@@ -62,10 +62,10 @@ function OrderDetails() {
           disable={ sale.status !== 'Em Trânsito' }
         />
         <table>
-          <TableHeader />
+          <TableOrderHeader />
           <tbody>
             {products.map((s, index) => (
-              <OrderSale
+              <OrderRow
                 page="customer_order_details"
                 key={ `${s.name}${index}` }
                 index={ index }

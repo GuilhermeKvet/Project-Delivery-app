@@ -11,8 +11,11 @@ const getAllUsers = async (_req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const sales = await userService.createUser(req.body);
-  return res.status(201).json(sales);
+  if (req.role === 'administrator') {
+    const sales = await userService.createUser(req.body);
+    return res.status(201).json(sales);
+  }
+  return res.status(401).json({ message: 'Protect route' });
 };
 
 const deleteUser = async (req, res) => {

@@ -1,12 +1,10 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../Button';
-import AppContext from '../../Context/AppContext';
 
 function Header(props) {
-  const { name } = useContext(AppContext);
-  const { orderPageRoute, text } = props;
+  const { name } = JSON.parse(localStorage.getItem('user'));
+  const { orderPageRoute, page } = props;
 
   const navigate = useNavigate();
 
@@ -25,26 +23,30 @@ function Header(props) {
 
   return (
     <header id="RegisterComponent">
-      { text === 'PRODUTOS' ? <Button
+      {page === 'customer' && <Button
         testId="customer_products__element-navbar-link-products"
-        text={ text }
+        text="PRODUTOS"
         exec={ productsPage }
-      /> : null }
-
-      { text === 'PEDIDOS' ? <Button
+      />}
+      {page === 'customer' && <Button
         testId="customer_products__element-navbar-link-orders"
-        text={ text }
+        text="MEUS PEDIDOS"
         exec={ orderPage }
-      /> : null }
-
-      { text === 'GERENCIAR USUÁRIOS' ? <Button
+      />}
+      {page === 'seller' && <Button
         testId="customer_products__element-navbar-link-orders"
-        text={ text }
-        exec={ () => console.log('catapoing') }
-      /> : null }
+        text="PEDIDOS"
+        exec={ orderPage }
+      />}
+      {page === 'adm' && <Button
+        testId="customer_products__element-navbar-link-orders"
+        text="GERENCIAR USUÁRIOS"
+        exec={ orderPage }
+      />}
       <Button
         testId="customer_products__element-navbar-user-full-name"
         text={ `${name}` }
+        exec={ () => {} }
       />
       <Button
         testId="customer_products__element-navbar-link-logout"
@@ -57,7 +59,7 @@ function Header(props) {
 
 Header.propTypes = {
   orderPageRoute: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
 };
 
 export default Header;

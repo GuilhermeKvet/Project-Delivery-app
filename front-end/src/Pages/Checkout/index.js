@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
-import OrderSale from '../../Components/OrderSale';
-import TableHeader from '../../Components/TableHeader';
+import OrderRow from '../../Components/OrderRow';
+import TableOrderHeader from '../../Components/TableOrderHeader';
 import Button from '../../Components/Button';
 import Address from '../../Components/AddressDetails';
 import AppContext from '../../Context/AppContext';
@@ -64,15 +64,15 @@ function Pedidos() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PRODUTOS"
+        page="customer"
       />
       <div>
         <h2>Finalizar Pedido</h2>
         <table>
-          <TableHeader isEditable />
+          <TableOrderHeader isEditable />
           <tbody>
             {products.map((sale, index) => (
-              <OrderSale
+              <OrderRow
                 page="customer_checkout"
                 key={ `${sale.name}${index}` }
                 index={ index }

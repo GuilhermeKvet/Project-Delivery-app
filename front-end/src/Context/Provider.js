@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
+import validateFields from '../Utils/validateFields';
 
-const SIX = 6;
 const TWELVE = 12;
-const TRUE = true;
-const FALSE = false;
 
 function Provider({ children }) {
   const [name, setName] = useState('');
@@ -16,17 +14,10 @@ function Provider({ children }) {
   const [disableRegisterButton, setdisableRegisterButton] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-
-  const validateLogin = (emailRecive, passwordRecive) => {
-    const regexEmail = /\S+@\S+\.\S+/;
-    if (regexEmail.test(emailRecive) && passwordRecive.length >= SIX) {
-      return TRUE;
-    }
-    return FALSE;
-  };
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (validateLogin(email, password)) {
+    if (validateFields(email, password)) {
       setdisableLoginButton(false);
     } else {
       setdisableLoginButton(true);
@@ -35,7 +26,7 @@ function Provider({ children }) {
   }, [password, email]);
 
   useEffect(() => {
-    if (validateLogin(email, password) && name.length >= TWELVE) {
+    if (validateFields(email, password) && name.length >= TWELVE) {
       setdisableRegisterButton(false);
     } else {
       setdisableRegisterButton(true);
@@ -58,6 +49,8 @@ function Provider({ children }) {
     setTotalPrice,
     products,
     setProducts,
+    users,
+    setUsers,
   }), [
     name,
     email,
@@ -67,6 +60,7 @@ function Provider({ children }) {
     error,
     totalPrice,
     products,
+    users,
   ]);
 
   return (

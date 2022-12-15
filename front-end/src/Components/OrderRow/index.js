@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AppContext from '../../Context/AppContext';
 import modelValue from '../../Utils/modelValue';
 
-function OrderSale(prop) {
+function OrderRow(prop) {
   const { index, price, name, quantity, isEditable, page } = prop;
 
   const { setProducts, setTotalPrice } = useContext(AppContext);
@@ -60,4 +60,4 @@ function OrderSale(prop) {
   );
 }
 
-export default OrderSale;
+export default OrderRow;
