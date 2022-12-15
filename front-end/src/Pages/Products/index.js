@@ -28,7 +28,7 @@ function Products() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PRODUTOS"
+        page="customer"
       />
       <div>
         { bebidas.map((bebida, index) => (

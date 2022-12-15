@@ -18,7 +18,7 @@ function CustomersOrders() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PRODUTOS"
+        page="customer"
       />
       <div>
         {sales.map((s) => (

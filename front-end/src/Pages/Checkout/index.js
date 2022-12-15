@@ -64,7 +64,7 @@ function Pedidos() {
     <div>
       <Header
         orderPageRoute="/customer/orders"
-        text="PRODUTOS"
+        page="customer"
       />
       <div>
         <h2>Finalizar Pedido</h2>

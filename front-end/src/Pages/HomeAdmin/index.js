@@ -35,7 +35,7 @@ function HomeAdmin() {
   return (
     <div>
       <Header
-        text="GERENCIAR USUÁRIOS"
+        page="adm"
         orderPageRoute="/admin/manage"
       />
       <span data-testid="admin_manage__element-invalid-register" />

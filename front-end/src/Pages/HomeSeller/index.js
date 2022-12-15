@@ -18,7 +18,7 @@ function HomeSeller() {
     <div>
       <Header
         orderPageRoute="/seller/orders"
-        text="PEDIDOS"
+        page="seller"
       />
       <div>
         { sales.map((item, index) => (<SaleCard
