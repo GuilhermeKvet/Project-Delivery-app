@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ItemCard from '../../Components/Card';
+import ItemCard from '../../Components/ProductCard';
 import Header from '../../Components/Header';
 import TotalPriceButton from '../../Components/TotalPriceButton';
 import AppContext from '../../Context/AppContext';

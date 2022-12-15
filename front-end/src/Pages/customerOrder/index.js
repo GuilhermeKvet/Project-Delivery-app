@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../Components/Header';
-import OrdersInProcess from '../../Components/ordersProcesses';
+import SaleCard from '../../Components/SaleCard';
 
 function CustomersOrders() {
   const [sales, setSales] = useState([]);
@@ -21,13 +21,16 @@ function CustomersOrders() {
         page="customer"
       />
       <div>
-        {sales.map((s) => (
-          <OrdersInProcess
-            key={ s.id }
-            orderId={ s.id }
-            totalPrice={ s.totalPrice }
-            data={ s.saleDate }
-            status={ s.status }
+        {sales.map((order) => (
+          <SaleCard
+            page="customer"
+            key={ order.id }
+            orderId={ order.id }
+            date={ order.saleDate }
+            totalPrice={ Number(order.totalPrice) }
+            status={ order.status }
+            adress={ order.deliveryAddress }
+            deliveryNumber={ order.deliveryNumber }
           />
         ))}
       </div>
