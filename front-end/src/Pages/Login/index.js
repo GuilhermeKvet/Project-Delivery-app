@@ -13,6 +13,7 @@ function Login() {
     disableLoginButton,
     setError,
     setName,
+    error,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -23,11 +24,14 @@ function Login() {
       if (hasLogin) {
         const user = data.find((item) => item.email === hasLogin.email);
         if (user) {
-          const { role, name } = user;
-          setName(name);
-          if (role === 'administrator') navigate('/admin/manage');
-          if (role === 'seller') navigate('/seller/orders');
-          navigate('/customer/products');
+          const { role } = user;
+          if (role === 'administrator') {
+            navigate('/admin/manage');
+          } else if (role === 'seller') {
+            navigate('/seller/orders');
+          } else {
+            navigate('/customer/products');
+          }
         }
       }
     };
@@ -48,7 +52,7 @@ function Login() {
     const user = await response.json();
 
     if (response.ok === false) {
-      setError({ message: response.statusText, status: response.status });
+      setError({ message: user.message, status: response.status });
     } else {
       setName(user.name);
       const { role } = user;
@@ -88,7 +92,9 @@ function Login() {
         text="Ainda não tenho conta"
         exec={ () => navigate('/register') }
       />
-      <span data-testid="common_login__element-invalid-email" />
+      <span data-testid="common_login__element-invalid-email">
+        { error.message }
+      </span>
     </div>
   );
 }

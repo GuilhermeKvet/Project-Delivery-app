@@ -29,7 +29,7 @@ function Register() {
     const user = await response.json();
 
     if (response.ok === false) {
-      setError({ message: response.statusText, status: response.status });
+      setError({ message: user.message, status: response.status });
     } else {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('carrinho', JSON.stringify([]));

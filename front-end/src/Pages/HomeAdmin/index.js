@@ -1,46 +1,61 @@
+import React, { useContext, useEffect } from 'react';
+import AppContext from '../../Context/AppContext';
 import Header from '../../Components/Header';
-import Input from '../../Components/Input';
-import Button from '../../Components/Button';
+import UserRow from '../../Components/UserRow';
+import TableUserHeader from '../../Components/TableUserHeader';
+import RegisterForm from '../../Components/RegisterForm';
 
 function HomeAdmin() {
+  // const [users, setUsers] = useState([]);
+
+  const {
+    error,
+    setName,
+    setEmail,
+    setPassword,
+    users,
+    setUsers,
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    setName('');
+    setEmail('');
+    setPassword('');
+  }, [setEmail, setName, setPassword]);
+
+  useEffect(() => {
+    const request = async () => {
+      const response = await fetch('http://localhost:3001/users');
+      const data = await response.json();
+      setUsers(data.filter((user) => user.role !== 'administrator'));
+    };
+    request();
+  }, [setUsers]);
+
   return (
     <div>
-      <Header text="GERENCIAR USUÁRIOS" />
+      <Header
+        text="GERENCIAR USUÁRIOS"
+        orderPageRoute="/admin/manage"
+      />
       <span data-testid="admin_manage__element-invalid-register" />
-      <form>
-        <Input
-          lable="Nome"
-          placeholder="Nome e Sobrenome"
-          type="text"
-          testId="admin_manage__input-name"
-        />
-        <Input
-          lable="Email"
-          placeholder="seu-email@site.com.br"
-          type="text"
-          testId="admin_manage__input-email"
-        />
-        <Input
-          lable="Senha"
-          placeholder="************"
-          type="text"
-          testId="admin_manage__input-password"
-        />
-        <label htmlFor="select_user_type">
-          Tipo
-          <select id="select_user_type" data-testId="admin_manage__select-role">
-            <option value="seller">Vendedor</option>
-            <option value="user">Usuario</option>
-            <option value="admin">Administrador</option>
-          </select>
-        </label>
-        <Button
-          text="CADASTRAR"
-          testId="admin_manage__button-register"
-          exec={ () => console.log('catapimbas') }
-        />
-      </form>
-
+      <RegisterForm />
+      <span>
+        {error.message}
+      </span>
+      <table>
+        <TableUserHeader />
+        <tbody>
+          { users.map((user, index) => (<UserRow
+            key={ `${user.id}${index}` }
+            index={ index }
+            id={ user.id }
+            name={ user.name }
+            email={ user.email }
+            type={ user.role }
+          />)) }
+        </tbody>
+      </table>
     </div>
   );
 }

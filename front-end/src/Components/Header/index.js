@@ -1,11 +1,9 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../Button';
-import AppContext from '../../Context/AppContext';
 
 function Header(props) {
-  const { name } = useContext(AppContext);
+  const { name } = JSON.parse(localStorage.getItem('user'));
   const { orderPageRoute, text } = props;
 
   const navigate = useNavigate();

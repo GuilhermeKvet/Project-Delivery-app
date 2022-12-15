@@ -1,4 +1,4 @@
-function TableHeader(prop) {
+function TableOrderHeader(prop) {
   const { isEditable } = prop;
 
   return (
@@ -16,4 +16,4 @@ function TableHeader(prop) {
   );
 }
 
-export default TableHeader;
+export default TableOrderHeader;

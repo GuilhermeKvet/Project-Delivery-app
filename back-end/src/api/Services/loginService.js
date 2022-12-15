@@ -36,7 +36,7 @@ const register = async (name, email, password, role) => {
   if (!hasUser) {
     const crypto = md5(password);
     
-    const token = generateToken({});
+    const token = generateToken({ role });
     
     const newUser = await User.create({ name, email, password: crypto, role });
     
