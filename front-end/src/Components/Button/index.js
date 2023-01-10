@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../../Styles/button.css';
 
 function Button(props) {
   const { text, testId, exec, disable, className } = props;

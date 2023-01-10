@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
+import '../../Styles/login.css';
+import logo from '../../images/delivery-img.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -65,7 +67,16 @@ function Login() {
   };
 
   return (
-    <div id="LoginComponent">
+    <div id="LoginComponent" className="login">
+      <img
+        src={ logo }
+        alt=""
+        className="logo"
+      />
+      <hr
+        width="100%"
+        size="1"
+      />
       <Input
         testId="common_login__input-email"
         placeholder="email@tryber.com"
@@ -85,12 +96,19 @@ function Login() {
         text="LOGIN"
         disable={ Boolean(disableLoginButton) }
         exec={ request }
+        className="loginButton"
       />
+      <hr
+        width="20%"
+        size="1"
+      />
+      <p>Não tem uma conta?</p>
       <Button
         testId="common_login__button-register"
         disable={ false }
-        text="Ainda não tenho conta"
+        text="Cadastrar"
         exec={ () => navigate('/register') }
+        className="loginButton"
       />
       <span data-testid="common_login__element-invalid-email">
         { error.message }

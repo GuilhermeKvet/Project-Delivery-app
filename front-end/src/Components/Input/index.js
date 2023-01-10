@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../../Context/AppContext';
+import '../../Styles/input.css';
 
 function Input(props) {
   const { setEmail, setPassword, setName } = useContext(AppContext);
@@ -19,10 +20,11 @@ function Input(props) {
   };
 
   return (
-    <div>
-      <label htmlFor={ id }>
+    <div className="container">
+      <label htmlFor={ id } className="label">
         {lable}
         <input
+          className="input"
           id={ id }
           data-testid={ `${testId}` }
           placeholder={ placeholder }

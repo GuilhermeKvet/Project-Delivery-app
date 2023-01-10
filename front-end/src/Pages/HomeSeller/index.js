@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../Components/Header';
 import SaleCard from '../../Components/SaleCard';
+import color from '../../Utils/whatStatusColor';
+import '../../Styles/sellerOrders.css';
 
 function HomeSeller() {
   const [sales, setSales] = useState([]);
@@ -20,7 +22,7 @@ function HomeSeller() {
         orderPageRoute="/seller/orders"
         page="seller"
       />
-      <div>
+      <div className="sellerOrders">
         { sales.map((order, index) => (
           <SaleCard
             page="seller"
@@ -31,6 +33,7 @@ function HomeSeller() {
             status={ order.status }
             adress={ order.deliveryAddress }
             deliveryNumber={ order.deliveryNumber }
+            color={ color(order.status) }
           />
         ))}
       </div>
