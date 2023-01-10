@@ -13,6 +13,7 @@ function TotalPriceButton(props) {
       type="button"
       onClick={ () => navigate('/customer/checkout') }
       disabled={ totalPrice === 0 }
+      className="totalValue"
     >
       <span
         data-testid="customer_products__checkout-bottom-value"
