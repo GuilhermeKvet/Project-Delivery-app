@@ -25,12 +25,18 @@ function Products() {
   }, [products, setTotalPrice]);
 
   return (
-    <div>
+    <div className="container">
+      <div>
+        <TotalPriceButton
+          totalPrice={ totalPrice }
+          testId="customer_products__button-cart"
+        />
+      </div>
       <Header
         orderPageRoute="/customer/orders"
         page="customer"
       />
-      <div>
+      <div className="cardContainer">
         { bebidas.map((bebida, index) => (
           <ItemCard
             key={ `${index}${bebida.name}` }
@@ -42,10 +48,6 @@ function Products() {
           />
         ))}
       </div>
-      <TotalPriceButton
-        totalPrice={ totalPrice }
-        testId="customer_products__button-cart"
-      />
     </div>
   );
 }

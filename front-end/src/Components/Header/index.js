@@ -22,36 +22,42 @@ function Header(props) {
   };
 
   return (
-    <header id="RegisterComponent">
+    <header className="header" id="RegisterComponent">
       {page === 'customer' && <Button
         testId="customer_products__element-navbar-link-products"
         text="PRODUTOS"
         exec={ productsPage }
+        className="headerButton"
       />}
       {page === 'customer' && <Button
         testId="customer_products__element-navbar-link-orders"
         text="MEUS PEDIDOS"
         exec={ orderPage }
+        className="headerButton"
       />}
       {page === 'seller' && <Button
         testId="customer_products__element-navbar-link-orders"
         text="PEDIDOS"
         exec={ orderPage }
+        className="headerButton"
       />}
       {page === 'adm' && <Button
         testId="customer_products__element-navbar-link-orders"
         text="GERENCIAR USUÁRIOS"
         exec={ orderPage }
+        className="headerButton"
       />}
       <Button
         testId="customer_products__element-navbar-user-full-name"
         text={ `${name}` }
         exec={ () => {} }
+        className="headerButton"
       />
       <Button
         testId="customer_products__element-navbar-link-logout"
         text="SAIR"
         exec={ logout }
+        className="headerButton"
       />
     </header>
   );

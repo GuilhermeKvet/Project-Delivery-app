@@ -77,6 +77,7 @@ function Amount(props) {
         type="button"
         onClick={ rmItem }
         disabled={ quantity === 0 }
+        className="cardLessBt"
       >
         -
       </button>
@@ -84,12 +85,14 @@ function Amount(props) {
         data-testid={ `customer_products__input-card-quantity-${index}` }
         value={ quantity }
         onChange={ (e) => addSaleLocalStorage(Number(e.target.value)) }
+        className="cardImput"
       />
       <button
         data-testid={ `customer_products__button-card-add-item-${index}` }
         type="button"
         onClick={ addItem }
         disabled={ false }
+        className="cardPlusBt"
       >
         +
       </button>

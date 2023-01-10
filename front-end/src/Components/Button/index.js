@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { text, testId, exec, disable } = props;
+  const { text, testId, exec, disable, className } = props;
   const disableStatus = disable || false;
   return (
     <button
@@ -9,6 +9,7 @@ function Button(props) {
       type="button"
       disabled={ disableStatus }
       onClick={ () => exec() }
+      className={ className }
     >
       {text}
     </button>
@@ -25,6 +26,7 @@ Button.propTypes = {
   testId: PropTypes.string.isRequired,
   exec: PropTypes.func,
   disable: PropTypes.bool,
+  className: PropTypes.string.isRequired,
 };
 
 export default Button;

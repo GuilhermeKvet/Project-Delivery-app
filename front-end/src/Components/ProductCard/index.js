@@ -4,22 +4,24 @@ import Amount from '../Amount';
 function ItemCard(props) {
   const { description, image, index, price, id } = props;
   return (
-    <div>
-      <div>
+    <div className="card">
+      <div className="cardPrice">
         <p data-testid={ `customer_products__element-card-price-${index}` }>
           {`R$ ${price.replace('.', ',')}`}
         </p>
       </div>
-      <div>
+      <div className="cardImg">
         <img
           data-testid={ `customer_products__img-card-bg-image-${index}` }
           src={ image }
           alt={ description }
           width="100px"
+          height="100px"
         />
       </div>
       <h3
         data-testid={ `customer_products__element-card-title-${index}` }
+        className="cardName"
       >
         {description}
       </h3>
