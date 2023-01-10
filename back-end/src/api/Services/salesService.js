@@ -38,14 +38,14 @@ const changeStatus = async (id, status) => {
 const createSale = async (sales) => {
   const { fields, orderProducts } = sales;
 
-  const { dataValues } = await Sales.create(fields);
+  const newSale = await Sales.create(fields);
 
   await Promise.all(orderProducts.map(async (product) => {
-    const obj = { ...product, saleId: dataValues.id };
-    await SalesProducts.create(obj);
+    const obj = { ...product, saleId: newSale.dataValues.id };
+    SalesProducts.create(obj);
   }));
 
-  return dataValues.id;
+  return newSale.dataValues.id;
 };
 
 module.exports = {
