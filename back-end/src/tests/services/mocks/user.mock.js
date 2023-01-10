@@ -1,17 +1,17 @@
 const allUsers = [
   {
+    "id": 2,
+    "email": "adm@deliveryapp.com",
+    "name": "Delivery App Admin",
+    "password": "a4c86edecc5aee06eff8fdeda69e0d04",
+    "role": "administrator",
+  },
+  {
     "id": 1,
     "name": "Delivery App Admin",
     "email": "adm@deliveryapp.com",
     "password": "a4c86edecc5aee06eff8fdeda69e0d04",
     "role": "administrator"
-  },
-  {
-    "id": 2,
-    "name": "Fulana Pereira",
-    "email": "fulana@deliveryapp.com",
-    "password": "3c28d2b0881bf46457a853e0b07531c6",
-    "role": "seller"
   },
   {
     "id": 3,

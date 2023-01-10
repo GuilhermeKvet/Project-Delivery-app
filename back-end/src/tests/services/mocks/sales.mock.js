@@ -64,10 +64,36 @@ const idNewSale = {
   }
 }
 
+const updateStatusSale = {
+  "id": 10,
+  "userId": 1,
+  "sellerId": 3,
+  "totalPrice": "6.98",
+  "deliveryAddress": "Rua Teste",
+  "deliveryNumber": "1",
+  "saleDate": "2022-12-15T22:32:21.000Z",
+  "status": "Pendente",
+  "products": [
+    {
+      "name": "Stella Artois 275ml",
+      "price": "3.49",
+      "SalesProducts": {
+        "saleId": 10,
+        "productId": 11,
+        "quantity": 2
+      }
+    }
+  ],
+  "seller": {
+    "name": "Cliente Zé Birita"
+  }
+}
+
 module.exports = {
   allSales,
   saleById,
   createSale,
   idNewSale,
   updateSaleById,
+  updateStatusSale
 }
