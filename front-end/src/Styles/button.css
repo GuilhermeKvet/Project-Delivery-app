@@ -1,0 +1,13 @@
+.loginButton {
+  background-color: #fb5913;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  width: 14.9rem;
+}
