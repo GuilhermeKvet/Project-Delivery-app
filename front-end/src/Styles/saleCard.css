@@ -1,0 +1,54 @@
+.order {
+  align-items: center;
+  background-color: white;
+  border: solid 0.5px black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.allInfoOrder {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoOrder {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 1rem;
+}
+
+.complementInfo {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+
+.orderId {
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  font-size: 25px;
+  height: 5.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.status {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  font-size: 25px;
+  height: 5.5rem;
+  margin-right: 5px;
+  padding: 0.5rem 1rem;
+}
+
+.adress {
+  font-size: 15px;
+}
