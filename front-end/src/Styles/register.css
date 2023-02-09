@@ -1,0 +1,16 @@
+body {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+}

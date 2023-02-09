@@ -49,6 +49,7 @@ function UserRow(prop) {
           type="button"
           onClick={ rmUser }
           data-testid={ `admin_manage__element-user-table-remove-${index}` }
+          className="rmButton"
         >
           Remover
         </button>

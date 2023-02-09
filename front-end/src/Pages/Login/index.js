@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
-import '../../Styles/login.css';
 import logo from '../../images/delivery-img.png';
+import '../../Styles/login.css';
 
 function Login() {
   const navigate = useNavigate();

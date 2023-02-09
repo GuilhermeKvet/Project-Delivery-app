@@ -11,3 +11,45 @@
   text-transform: uppercase;
   width: 14.9rem;
 }
+
+.registerButton {
+  background-color: #fb5913;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  width: 14.9rem;
+}
+
+.admButton {
+  background-color: #fb5913;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  width: 14.9rem;
+}
+
+.rmButton {
+  background-color: red;
+  border: none;
+  border-radius: 15px;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 0.2rem 1rem;
+  text-transform: uppercase;
+  width: 10rem;
+}

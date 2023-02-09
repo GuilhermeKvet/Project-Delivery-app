@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import AppContext from '../../Context/AppContext';
 import Input from '../Input';
 import Button from '../Button';
+import '../../Styles/adm.css';
 
 function RegisterForm() {
   const [role, setRole] = useState('customer');
@@ -42,7 +43,7 @@ function RegisterForm() {
   };
 
   return (
-    <form>
+    <form className="form">
       <Input
         testId="admin_manage__input-name"
         placeholder="Nome e Sobrenome"
@@ -64,12 +65,13 @@ function RegisterForm() {
         testId="admin_manage__input-password"
         state={ password }
       />
-      <label htmlFor="select_user_type">
+      <label htmlFor="select_user_type" className="label">
         Tipo
         <select
           id="select_user_type"
           data-testid="admin_manage__select-role"
           onChange={ (e) => setRole(e.target.value) }
+          className="form-select"
         >
           <option value="customer">Cliente</option>
           <option value="seller">Vendedor</option>
@@ -81,6 +83,7 @@ function RegisterForm() {
         testId="admin_manage__button-register"
         exec={ request }
         disable={ Boolean(disableRegisterButton) }
+        className="admButton"
       />
     </form>
   );

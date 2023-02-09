@@ -1,0 +1,24 @@
+.admPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  width: 50rem;
+}
+
+.RegisterForm {
+  display: flex;
+}
+
+.form-select {
+  margin-right: 10px;
+  width: 130px;
+}
+
+.TableUserHeader {
+  border: solid 1px black;
+  display: flex;
+}

@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import UserRow from '../../Components/UserRow';
 import TableUserHeader from '../../Components/TableUserHeader';
 import RegisterForm from '../../Components/RegisterForm';
+import '../../Styles/adm.css';
 
 function HomeAdmin() {
   // const [users, setUsers] = useState([]);
@@ -33,17 +34,20 @@ function HomeAdmin() {
   }, [setUsers]);
 
   return (
-    <div>
+    <div className="admPage">
       <Header
         page="adm"
         orderPageRoute="/admin/manage"
       />
       <span data-testid="admin_manage__element-invalid-register" />
-      <RegisterForm />
+      <div className="RegisterForm">
+        <RegisterForm />
+      </div>
       <span>
         {error.message}
       </span>
-      <table>
+      <br />
+      <table className="table">
         <TableUserHeader />
         <tbody>
           { users.map((user, index) => (<UserRow

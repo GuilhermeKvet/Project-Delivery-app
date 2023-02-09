@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import AppContext from '../../Context/AppContext';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
+import logo from '../../images/delivery-img.png';
+import '../../Styles/register.css';
 
 function Register() {
   const {
@@ -38,9 +40,19 @@ function Register() {
   };
 
   return (
-    <div id="RegisterComponent">
-      <span> Cadastro </span>
+    <div id="RegisterComponent" className="register">
       <section id="RegisterForm">
+        <img
+          src={ logo }
+          alt=""
+          className="logo"
+        />
+        <h1> Cadastro </h1>
+        <hr
+          width="100%"
+          size="1"
+        />
+        <br />
         <Input
           testId="common_register__input-name"
           placeholder="Seu nome"
@@ -48,6 +60,7 @@ function Register() {
           type="name"
           state={ name }
         />
+        <br />
         <Input
           testId="common_register__input-email"
           placeholder="seu-email@site.com.br"
@@ -55,6 +68,7 @@ function Register() {
           type="email"
           state={ email }
         />
+        <br />
         <Input
           testId="common_register__input-password"
           placeholder="*********"
@@ -62,11 +76,13 @@ function Register() {
           type="password"
           state={ password }
         />
+        <br />
         <Button
           testId="common_register__button-register"
           text="CADASTRAR"
           disable={ Boolean(disableRegisterButton) }
           exec={ request }
+          className="registerButton"
         />
         <span
           data-testid="common_register__element-invalid_register"
